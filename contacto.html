@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -53,7 +52,7 @@
       <div class="contact-layout">
 
         <!-- INFO -->
-        <div class="contact-info" data-aos="fade-up">
+        <div class="contact-info">
           <h2 class="contact-info__title">Antes de<br>escribir, <em>recuerda:</em></h2>
           <p class="contact-info__desc">No hay preguntas tontas ni proyectos demasiado pequeños. Si no estamos seguros de poder ayudarte, te lo decimos con honestidad.</p>
           <div class="contact-info__items">
@@ -97,9 +96,9 @@
         </div>
 
         <!-- FORM -->
-        <div class="" data-aos="fade-up" data-aos-delay="300">
+        <div class="">
           <div class="contact-form" id="contact-form-wrapper">
-            <form id="contact-form" novalidate>
+            <form id="contact-form" action="https://formspree.io/f/xvzwvylp" method="POST" novalidate>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="nombre">Nombre</label>
@@ -168,24 +167,24 @@
   <!-- FAQ -->
   <section style="padding-block: var(--section-gap);">
     <div class="container">
-      <div class="section-header" data-aos="fade-up">
+      <div class="section-header">
         <span class="section-label">FAQ</span>
         <h2 class="section-title">Preguntas<br><em>frecuentes</em></h2>
       </div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 900px;">
-        <div class="card" data-aos="fade-up" data-aos-delay="150" style="padding: 28px;">
+        <div class="card" style="padding: 28px;">
           <h3 style="font-size: 16px; font-weight: 400; margin-bottom: 10px; color: var(--text);">¿Trabajáis con pequeñas empresas?</h3>
           <p style="font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6;">Sí. De hecho, es donde la automatización tiene más impacto relativo. No necesitas tener un equipo grande para aprovechar estas herramientas.</p>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="300" style="padding: 28px;">
+        <div class="card" style="padding: 28px;">
           <h3 style="font-size: 16px; font-weight: 400; margin-bottom: 10px; color: var(--text);">¿Cuánto cuesta un proyecto?</h3>
           <p style="font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6;">Depende del alcance. Un flujo de automatización básico puede estar en 300–600€. Un agente de IA personalizado o una web completa va de 800€ en adelante.</p>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="150" style="padding: 28px;">
+        <div class="card" style="padding: 28px;">
           <h3 style="font-size: 16px; font-weight: 400; margin-bottom: 10px; color: var(--text);">¿Cuánto tarda un proyecto?</h3>
           <p style="font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6;">Automatizaciones simples: 1–2 semanas. Proyectos complejos (web + agente): 3–6 semanas. Te damos un timeline concreto antes de empezar.</p>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="300" style="padding: 28px;">
+        <div class="card" style="padding: 28px;">
           <h3 style="font-size: 16px; font-weight: 400; margin-bottom: 10px; color: var(--text);">¿Necesito saber de tecnología?</h3>
           <p style="font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6;">Para nada. Nos encargamos de todo lo técnico y te entregamos algo que puedas usar y entender. Si quieres aprender a gestionarlo, también te enseñamos.</p>
         </div>
@@ -207,7 +206,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

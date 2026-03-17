@@ -2,14 +2,6 @@
    NITIDLY — main.js
    ============================================= */
 
-// ─── AOS — Animate On Scroll ────────────────
-AOS.init({
-  duration: 600,
-  easing: 'ease-out',
-  once: true,
-  offset: 60,
-});
-
 // ─── Nav scroll effect ──────────────────────
 const nav = document.getElementById('nav');
 if (nav) {
@@ -139,14 +131,28 @@ if (contactForm && formSuccess) {
     btn.textContent = 'Enviando...';
     btn.style.opacity = '0.7';
 
-    await new Promise(resolve => setTimeout(resolve, 1200));
+    try {
+      const response = await fetch('https://formspree.io/f/xvzwvylp', {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
 
-    contactForm.style.display = 'none';
-    formSuccess.classList.add('show');
-
-    btn.disabled = false;
-    btn.textContent = originalText;
-    btn.style.opacity = '';
+      if (response.ok) {
+        contactForm.style.display = 'none';
+        formSuccess.classList.add('show');
+      } else {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        btn.style.opacity = '';
+        alert('Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos a nitidly.ia@gmail.com');
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = originalText;
+      btn.style.opacity = '';
+      alert('Error de conexión. Por favor, inténtalo de nuevo.');
+    }
   });
 
   contactForm.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(field => {

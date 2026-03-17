@@ -269,9 +269,16 @@ section, .strip, .cta-mid, .page-header {
   z-index: 0;
   pointer-events: none;
 }
-/* All page sections and content sit above the particles canvas */
-.hero, .diagnostico, .strip, .pilares, .servicios, #proyectos,
-.cta-mid, .cta-section, .footer {
+/* Section particles — contained within their parent, never disrupt layout */
+.section-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+/* All sections sit above any canvas layer */
+section, .strip, .cta-mid, .footer, .page-header {
   position: relative;
   z-index: 1;
 }
@@ -283,14 +290,9 @@ section, .strip, .cta-mid, .page-header {
   overflow: hidden;
 }
 /* Content inside stays above canvas */
-.diagnostico .container,
-.pilares .container,
-.cta-section .container,
+section .container,
+.cta-mid__inner,
 .page-header .page-header__container {
-  position: relative;
-  z-index: 1;
-}
-.cta-mid__inner {
   position: relative;
   z-index: 1;
 }
