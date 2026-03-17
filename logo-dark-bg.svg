@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 72" width="260" height="72" role="img" aria-label="nítidly">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;display=swap');
+      .logo-base {
+        font-family: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+        font-size: 44px;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+      }
+      .logo-main   { fill: #F7F6F2; }
+      .logo-accent { fill: #5DCAA5; font-style: italic; }
+    </style>
+  </defs>
+  <!-- Background -->
+  <rect width="260" height="72" rx="12" fill="#111110"/>
+  <!-- Wordmark centered -->
+  <text x="16" y="48" class="logo-base">
+    <tspan class="logo-main">nítid</tspan><tspan class="logo-accent">ly</tspan>
+  </text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Nitidly icon">
+  <!-- Square background -->
+  <rect width="48" height="48" rx="10" fill="#111110"/>
+  <!-- Border -->
+  <rect x="0.5" y="0.5" width="47" height="47" rx="9.5" fill="none" stroke="rgba(247,246,242,0.1)" stroke-width="0.5"/>
+  <!-- Green dot accent -->
+  <circle cx="36" cy="12" r="3" fill="#1D9E75"/>
+  <!-- "N" lettermark in DM Serif Display italic -->
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;display=swap');
+      .icon-letter {
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-size: 30px;
+        font-style: italic;
+        fill: #F7F6F2;
+        font-weight: 400;
+      }
+    </style>
+  </defs>
+  <text x="7" y="35" class="icon-letter">n</text>
+</svg>

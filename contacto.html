@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — Nitidly</title>
+  <meta name="description" content="Cuéntanos en qué podemos ayudarte. Respondemos en menos de 24h.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="index.html" style="display:flex; align-items:center; gap:10px; text-decoration:none;"><img src="NL.png" style="height:64px; width:auto;"><span style="font-family:'DM Serif Display',serif; font-size:28px; color:#F7F6F2; letter-spacing:-0.02em;">nítid<em style="color:#5DCAA5;">ly</em></span></a>
+      <ul class="nav__links">
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="index.html#proyectos">Proyectos</a></li>
+        <li><a href="sobre-mi.html">Sobre mí</a></li>
+      </ul>
+      <a href="contacto.html" class="btn btn--primary nav__cta" style="border-color: var(--green-light); background: var(--green-light);">Hablamos →</a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav__mobile" id="nav-mobile">
+    <a href="servicios.html">Servicios</a>
+    <a href="index.html#proyectos">Proyectos</a>
+    <a href="sobre-mi.html">Sobre mí</a>
+    <a href="contacto.html" class="btn btn--primary">Hablamos →</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div id="header-contact-particles" class="section-particles"></div>
+    <div class="page-header__container">
+      <span class="page-header__label">Contacto</span>
+      <h1 class="page-header__title">Cuéntanos<br>en qué <em>te ayudamos.</em></h1>
+      <p class="page-header__sub">Respondemos siempre en menos de 24 horas. Sin formularios eternos, sin esperas innecesarias.</p>
+    </div>
+  </header>
+
+  <!-- CONTACT LAYOUT -->
+  <section class="bg-alt">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- INFO -->
+        <div class="contact-info" data-aos="fade-up">
+          <h2 class="contact-info__title">Antes de<br>escribir, <em>recuerda:</em></h2>
+          <p class="contact-info__desc">No hay preguntas tontas ni proyectos demasiado pequeños. Si no estamos seguros de poder ayudarte, te lo decimos con honestidad.</p>
+          <div class="contact-info__items">
+            <div class="contact-info__item">
+              <span class="contact-info__item-icon">📬</span>
+              <div class="contact-info__item-text">
+                <strong>Email</strong>
+                <a href="mailto:nitidly.ia@gmail.com" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">nitidly.ia@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-info__item">
+              <span class="contact-info__item-icon">⏱</span>
+              <div class="contact-info__item-text">
+                <strong>Tiempo de respuesta</strong>
+                Menos de 24h en días laborables
+              </div>
+            </div>
+            <div class="contact-info__item">
+              <span class="contact-info__item-icon">🌍</span>
+              <div class="contact-info__item-text">
+                <strong>Zona horaria</strong>
+                España (CET/CEST) — trabajando con clientes de toda Europa
+              </div>
+            </div>
+            <div class="contact-info__item">
+              <span class="contact-info__item-icon">💬</span>
+              <div class="contact-info__item-text">
+                <strong>Idioma</strong>
+                Español e inglés
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 48px; padding: 24px; border: 0.5px solid var(--border-green); border-radius: var(--radius-md); background: var(--green-glow);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+              <span class="hero__dot"></span>
+              <span style="font-size: 13px; color: var(--green-light); font-weight: 400;">Disponible para nuevos proyectos</span>
+            </div>
+            <p style="font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6;">Actualmente tenemos hueco para 1–2 proyectos nuevos. Si quieres empezar pronto, mejor que hablemos cuanto antes.</p>
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="" data-aos="fade-up" data-aos-delay="300">
+          <div class="contact-form" id="contact-form-wrapper">
+            <form id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="nombre">Nombre</label>
+                  <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autocomplete="given-name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="email">Email</label>
+                  <input class="form-input" type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="empresa">Empresa o proyecto <span style="color: var(--text-dim); font-weight: 300; letter-spacing: 0;">(opcional)</span></label>
+                <input class="form-input" type="text" id="empresa" name="empresa" placeholder="¿Con qué negocio trabajas?" autocomplete="organization">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="servicio">¿En qué podemos ayudarte?</label>
+                <select class="form-select" id="servicio" name="servicio" required>
+                  <option value="" disabled selected>Selecciona un servicio</option>
+                  <option value="automatizacion">Automatización de procesos</option>
+                  <option value="web">Web con IA</option>
+                  <option value="agente">Agente de IA personalizado</option>
+                  <option value="todo">Varias cosas a la vez</option>
+                  <option value="otro">No sé exactamente, quiero consejo</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="mensaje">Cuéntanos más</label>
+                <textarea class="form-textarea" id="mensaje" name="mensaje" placeholder="¿Qué quieres conseguir? ¿Qué problema tienes ahora mismo? Cuanto más nos cuentes, mejor te podemos orientar." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="presupuesto">Presupuesto aproximado <span style="color: var(--text-dim); font-weight: 300; letter-spacing: 0;">(opcional)</span></label>
+                <select class="form-select" id="presupuesto" name="presupuesto">
+                  <option value="" disabled selected>Rango orientativo</option>
+                  <option value="menos-500">Menos de 500 €</option>
+                  <option value="500-1500">500 € – 1.500 €</option>
+                  <option value="1500-3000">1.500 € – 3.000 €</option>
+                  <option value="3000-plus">Más de 3.000 €</option>
+                  <option value="sin-definir">Aún no lo sé</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <button type="submit" class="btn btn--primary btn--lg form-submit">
+                  Enviar mensaje →
+                </button>
+              </div>
+            </form>
+
+            <!-- Success state -->
+            <div class="form-success" id="form-success">
+              <div class="form-success__icon">✅</div>
+              <h3 class="form-success__title">¡Mensaje recibido!</h3>
+              <p class="form-success__text">Te respondemos en menos de 24 horas. Mientras tanto, puedes echarle un vistazo a los <a href="servicios.html" style="color: var(--green-light);">servicios</a> o conocernos un poco más <a href="sobre-mi.html" style="color: var(--green-light);">aquí</a>.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="padding-block: var(--section-gap);">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Preguntas<br><em>frecuentes</em></h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 900px;">
+        <div class="card" data-aos="fade-up" data-aos-delay="150" style="padding: 28px;">
+          <h3 style="font-size: 16px; font-weight: 400; margin-bottom: 10px; color: var(--text);">¿Trabajáis con pequeñas empresas?</h3>
+          <p style="font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6;">Sí. De hecho, es donde la automatización tiene más impacto relativo. No necesitas tener un equipo grande para aprovechar estas herramientas.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="300" style="padding: 28px;">
+          <h3 style="font-size: 16px; font-weight: 400; margin-bottom: 10px; color: var(--text);">¿Cuánto cuesta un proyecto?</h3>
+          <p style="font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6;">Depende del alcance. Un flujo de automatización básico puede estar en 300–600€. Un agente de IA personalizado o una web completa va de 800€ en adelante.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="150" style="padding: 28px;">
+          <h3 style="font-size: 16px; font-weight: 400; margin-bottom: 10px; color: var(--text);">¿Cuánto tarda un proyecto?</h3>
+          <p style="font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6;">Automatizaciones simples: 1–2 semanas. Proyectos complejos (web + agente): 3–6 semanas. Te damos un timeline concreto antes de empezar.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="300" style="padding: 28px;">
+          <h3 style="font-size: 16px; font-weight: 400; margin-bottom: 10px; color: var(--text);">¿Necesito saber de tecnología?</h3>
+          <p style="font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6;">Para nada. Nos encargamos de todo lo técnico y te entregamos algo que puedas usar y entender. Si quieres aprender a gestionarlo, también te enseñamos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div style="display:flex; align-items:center; gap:10px;"><img src="NL.png" style="height:64px; width:auto;"><div style="display:flex; flex-direction:column;"><span style="font-family:'DM Serif Display',serif; font-size:32px; color:#F7F6F2; letter-spacing:-0.02em;">nítid<em style="color:#5DCAA5;">ly</em></span><span style="font-size:11px; letter-spacing:0.18em; color:#888780; margin-top:2px; display:block;">AI AGENCY</span></div></div>
+      <p class="footer__copy">nitidly.io · Ana Clemente</p>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="servicios.html">Servicios</a>
+        <a href="sobre-mi.html">Sobre mí</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

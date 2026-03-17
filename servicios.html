@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios — Nitidly</title>
+  <meta name="description" content="Automatización, webs con IA y agentes inteligentes para negocios que quieren crecer sin perder el tiempo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="index.html" style="display:flex; align-items:center; gap:10px; text-decoration:none;"><img src="NL.png" style="height:64px; width:auto;"><span style="font-family:'DM Serif Display',serif; font-size:28px; color:#F7F6F2; letter-spacing:-0.02em;">nítid<em style="color:#5DCAA5;">ly</em></span></a>
+      <ul class="nav__links">
+        <li><a href="servicios.html" style="color: var(--text);">Servicios</a></li>
+        <li><a href="index.html#proyectos">Proyectos</a></li>
+        <li><a href="sobre-mi.html">Sobre mí</a></li>
+      </ul>
+      <a href="contacto.html" class="btn btn--primary nav__cta">Hablamos →</a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav__mobile" id="nav-mobile">
+    <a href="servicios.html">Servicios</a>
+    <a href="index.html#proyectos">Proyectos</a>
+    <a href="sobre-mi.html">Sobre mí</a>
+    <a href="contacto.html" class="btn btn--primary">Hablamos →</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div id="header-serv-particles" class="section-particles"></div>
+    <div class="page-header__container">
+      <span class="page-header__label">Servicios</span>
+      <h1 class="page-header__title">Herramientas que<br><em>realmente funcionan.</em></h1>
+      <p class="page-header__sub">Tres áreas concretas donde la tecnología hace el trabajo pesado para que tú puedas centrarte en lo importante.</p>
+    </div>
+  </header>
+
+  <!-- SERVICES DETAIL -->
+  <section class="servicios-detail">
+    <div class="container">
+
+      <!-- Diagnóstico -->
+      <div class="service-block service-block--featured" data-aos="fade-up" id="diagnostico">
+        <div>
+          <div class="service-block__icon">🔍</div>
+          <h2 class="service-block__title">Diagnóstico<br><em>estratégico de IA</em></h2>
+          <p class="service-block__desc">Antes de implementar cualquier automatización o agente, necesitas saber exactamente dónde tiene sentido hacerlo. Analizamos tus procesos actuales, detectamos los cuellos de botella reales y te entregamos un mapa claro de qué automatizar, en qué orden y qué impacto esperar. Sin tecnicismos, sin humo.</p>
+          <p style="font-size: 13px; color: var(--text-dim); font-weight: 300; margin-top: 12px; margin-bottom: 24px;">Precio: <span style="color: var(--green-light); font-weight: 400;">Desde 297 €</span> — entregado en 5–7 días hábiles</p>
+          <a href="contacto.html" class="btn btn--primary">Quiero mi diagnóstico →</a>
+        </div>
+        <div class="service-block__features">
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Entrevista de 60 min para entender tu negocio, equipo y herramientas actuales</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Mapa de procesos con identificación de tareas automatizables y su impacto estimado</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Hoja de ruta priorizada: qué hacer primero, qué esperar y en qué orden</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Recomendación de herramientas adaptadas a tu stack actual y presupuesto</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Estimación de coste y retorno de las automatizaciones recomendadas</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Documento entregable que puedes usar aunque no sigas trabajando con nosotros</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automatización -->
+      <div class="service-block" data-aos="fade-up" id="automatizacion">
+        <div>
+          <div class="service-block__icon">⚙️</div>
+          <h2 class="service-block__title">Automatización<br>de <em>procesos</em></h2>
+          <p class="service-block__desc">¿Cuántas horas a la semana pierdes haciendo lo mismo una y otra vez? Mover datos, enviar emails, crear informes, responder mensajes repetitivos. Todo eso puede hacerse solo mientras tú te dedicas a lo que realmente mueve tu negocio.</p>
+          <a href="contacto.html" class="btn btn--primary">Quiero automatizar →</a>
+        </div>
+        <div class="service-block__features">
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Flujos automáticos con Make, Zapier o n8n adaptados a tus herramientas actuales</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Integración entre CRM, email, calendarios, hojas de cálculo y más</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Notificaciones y alertas automáticas para tu equipo o tus clientes</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Generación automática de reportes, facturas o documentos</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Pipelines de captación de leads sin intervención manual</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Documentación y formación para que puedas gestionarlo tú mismo</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Webs con IA -->
+      <div class="service-block" data-aos="fade-up" id="webs">
+        <div>
+          <div class="service-block__icon">🌐</div>
+          <h2 class="service-block__title">Webs con<br><em>inteligencia</em></h2>
+          <p class="service-block__desc">Un sitio web que no convierte es solo un gasto. Diseñamos webs limpias, rápidas y con IA integrada que hacen el trabajo de un comercial: cualifican leads, responden preguntas y guían al usuario hacia la acción correcta.</p>
+          <a href="contacto.html" class="btn btn--primary">Quiero una web así →</a>
+        </div>
+        <div class="service-block__features">
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Diseño minimalista y orientado a conversión, no solo estético</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Chat o asistente de IA entrenado con tu contenido y servicios</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Formularios inteligentes que filtran y cualifican prospectos</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Integración directa con tu CRM o herramientas de gestión</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Carga rápida, accesible y optimizada para buscadores (SEO)</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Responsive y perfecta en cualquier dispositivo</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agentes de IA -->
+      <div class="service-block" data-aos="fade-up" id="agentes">
+        <div>
+          <div class="service-block__icon">🤖</div>
+          <h2 class="service-block__title">Agentes de<br><em>IA personalizados</em></h2>
+          <p class="service-block__desc">Un agente de IA no es un chatbot genérico. Es un asistente entrenado específicamente para tu negocio que entiende tu contexto, tus clientes y tus procesos. Disponible 24/7, sin cansarse, sin olvidar, sin errores de criterio.</p>
+          <a href="contacto.html" class="btn btn--primary">Quiero mi agente →</a>
+        </div>
+        <div class="service-block__features">
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Agente entrenado con tu base de conocimiento, FAQs y procesos internos</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Integración en WhatsApp, Instagram, web o plataformas internas</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Gestión y cualificación automática de leads entrantes</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Soporte al cliente autónomo con escalado inteligente al equipo humano</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Asistente interno para tu equipo: onboarding, consultas de procedimiento</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item__check">✓</div>
+            <p class="feature-item__text">Actualizaciones y ajustes continuos según el feedback real de uso</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process bg-alt">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-label">Cómo trabajamos</span>
+        <h2 class="section-title">Del problema a la<br><em>solución en marcha</em></h2>
+      </div>
+      <div class="process__steps">
+        <div class="step" data-aos="fade-up" data-aos-delay="150">
+          <div class="step__num">01</div>
+          <h3 class="step__title">Entendemos tu negocio</h3>
+          <p class="step__desc">Empezamos con una llamada donde nos cuentas cómo funciona todo, qué duele y dónde quieres llegar. Sin formularios de 20 preguntas.</p>
+        </div>
+        <div class="step" data-aos="fade-up" data-aos-delay="300">
+          <div class="step__num">02</div>
+          <h3 class="step__title">Diseñamos la solución</h3>
+          <p class="step__desc">Te presentamos un plan claro: qué vamos a hacer, cómo, con qué herramientas y qué resultado esperar. Sin jerga técnica.</p>
+        </div>
+        <div class="step" data-aos="fade-up" data-aos-delay="450">
+          <div class="step__num">03</div>
+          <h3 class="step__title">Construimos y probamos</h3>
+          <p class="step__desc">Nos encargamos del desarrollo con actualizaciones frecuentes. Probamos todo antes de entregarte nada que no funcione al 100%.</p>
+        </div>
+        <div class="step" data-aos="fade-up" data-aos-delay="450">
+          <div class="step__num">04</div>
+          <h3 class="step__title">Entregamos y acompañamos</h3>
+          <p class="step__desc">Te lo entregamos con documentación y formación. Y si algo falla o quieres mejorarlo, estamos ahí. No desaparecemos tras la entrega.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section bg-cta">
+    <div id="cta-serv-particles" class="section-particles"></div>
+    <div class="container">
+      <div class="cta-section__inner" data-aos="fade-up">
+        <h2 class="cta-section__title">Empieza con una<br><em>llamada gratuita</em></h2>
+        <p class="cta-section__text">Sin compromiso. Nos cuentas tu situación y te decimos con honestidad si podemos ayudarte y cómo.</p>
+        <a href="contacto.html" class="btn btn--primary btn--lg">Reservar llamada →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div style="display:flex; align-items:center; gap:10px;"><img src="NL.png" style="height:64px; width:auto;"><div style="display:flex; flex-direction:column;"><span style="font-family:'DM Serif Display',serif; font-size:32px; color:#F7F6F2; letter-spacing:-0.02em;">nítid<em style="color:#5DCAA5;">ly</em></span><span style="font-size:11px; letter-spacing:0.18em; color:#888780; margin-top:2px; display:block;">AI AGENCY</span></div></div>
+      <p class="footer__copy">nitidly.io · Ana Clemente</p>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="servicios.html">Servicios</a>
+        <a href="sobre-mi.html">Sobre mí</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
