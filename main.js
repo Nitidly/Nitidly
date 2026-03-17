@@ -96,16 +96,11 @@ function initParticles(id, variant) {
   particlesJS(id, buildParticlesConfig(variant));
 }
 
-// Hero — siempre activo
-initParticles('hero-particles', 'hero');
+// Canvas global fijo — cubre toda la página en index.html
+initParticles('global-particles', 'hero');
 
-// Resto de secciones — solo en pantallas > 768px (rendimiento)
+// Partículas por sección — solo en pantallas > 768px (rendimiento)
 if (window.innerWidth > 768) {
-  // index.html
-  initParticles('diagnostico-particles', 'medium');
-  initParticles('pilares-particles',     'subtle');
-  initParticles('cta-mid-particles',     'subtle');
-  initParticles('cta-main-particles',    'medium');
   // servicios.html
   initParticles('header-serv-particles', 'medium');
   initParticles('cta-serv-particles',    'medium');
