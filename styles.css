@@ -1216,20 +1216,6 @@ section .container,
   position: relative;
   overflow: hidden;
 }
-.service-block--featured::after {
-  content: 'Primer paso';
-  position: absolute;
-  top: 20px; right: 20px;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--green-light);
-  border: 0.5px solid var(--border-green);
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  background: rgba(29,158,117,0.1);
-}
 
 /* =============================================
    RESPONSIVE
