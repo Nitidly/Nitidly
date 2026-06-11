@@ -118,6 +118,14 @@ if (contactForm && formSuccess) {
     let valid = true;
 
     required.forEach(field => {
+      if (field.type === 'checkbox') {
+        field.closest('.form-checkbox')?.classList.remove('invalid');
+        if (!field.checked) {
+          field.closest('.form-checkbox')?.classList.add('invalid');
+          valid = false;
+        }
+        return;
+      }
       field.style.borderColor = '';
       if (!field.value.trim()) {
         field.style.borderColor = 'rgba(255, 80, 80, 0.5)';
@@ -158,6 +166,12 @@ if (contactForm && formSuccess) {
   contactForm.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(field => {
     field.addEventListener('input', () => {
       field.style.borderColor = '';
+    });
+  });
+
+  contactForm.querySelectorAll('input[type="checkbox"]').forEach(field => {
+    field.addEventListener('change', () => {
+      field.closest('.form-checkbox')?.classList.remove('invalid');
     });
   });
 }

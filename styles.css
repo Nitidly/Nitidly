@@ -969,6 +969,28 @@ section .container,
 .form-select option { background: #1a1a18; }
 .form-submit { width: 100%; justify-content: center; }
 
+/* Checkbox de consentimiento */
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.5;
+}
+.form-checkbox input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: var(--green);
+  cursor: pointer;
+}
+.form-checkbox a { color: var(--green-light); }
+.form-checkbox.invalid span { color: rgba(255, 90, 90, 0.9); }
+
 /* Success message */
 .form-success {
   display: none;
@@ -979,6 +1001,43 @@ section .container,
 .form-success__icon { font-size: 40px; margin-bottom: 16px; }
 .form-success__title { font-family: var(--font-title); font-size: 24px; margin-bottom: 8px; }
 .form-success__text { font-size: 15px; color: var(--text-muted); font-weight: 300; }
+
+/* =============================================
+   LEGAL PAGES
+   ============================================= */
+.legal-content {
+  max-width: 760px;
+  margin-inline: auto;
+  padding-block: 80px;
+}
+.legal-content .legal-updated {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 40px;
+}
+.legal-content h2 {
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--text);
+  margin-top: 44px;
+  margin-bottom: 14px;
+}
+.legal-content h2:first-of-type { margin-top: 0; }
+.legal-content p,
+.legal-content li {
+  font-size: 15px;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.7;
+}
+.legal-content p { margin-bottom: 16px; }
+.legal-content ul {
+  margin: 0 0 16px 20px;
+}
+.legal-content li { margin-bottom: 8px; }
+.legal-content strong { color: var(--text); font-weight: 500; }
+.legal-content a { color: var(--green-light); }
 
 /* =============================================
    SECTION BACKGROUNDS
