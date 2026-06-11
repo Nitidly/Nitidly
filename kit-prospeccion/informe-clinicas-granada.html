@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de Prospección — Clínicas Granada</title>
+<style>
+  :root {
+    --brand: #2563eb;
+    --brand-light: #eff6ff;
+    --green: #16a34a;
+    --red: #dc2626;
+    --yellow: #d97706;
+    --gray: #64748b;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-soft: #475569;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #1e40af 0%, #2563eb 60%, #3b82f6 100%); color: white; padding: 48px 32px 40px; text-align: center; }
+  .header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+  .header p { opacity: .85; font-size: 1.05rem; }
+  .meta-pills { display: flex; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+  .pill { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 4px 16px; font-size: .85rem; }
+
+  /* WRAPPER */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .stat-num { font-size: 2.2rem; font-weight: 700; color: var(--brand); }
+  .stat-label { font-size: .85rem; color: var(--gray); margin-top: 4px; }
+
+  /* SECTION TITLES */
+  h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+  h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-bottom: 48px; border-radius: 12px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); font-size: .9rem; }
+  thead th { background: #1e40af; color: white; padding: 12px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+  tbody tr:nth-child(even) { background: #f1f5f9; }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--brand-light); }
+
+  /* BADGES */
+  .badge { display: inline-block; border-radius: 999px; padding: 2px 10px; font-size: .78rem; font-weight: 600; }
+  .badge-green { background: #dcfce7; color: var(--green); }
+  .badge-red { background: #fee2e2; color: var(--red); }
+  .badge-yellow { background: #fef3c7; color: var(--yellow); }
+
+  /* STARS */
+  .stars { color: #f59e0b; font-size: 1rem; }
+  .stars-empty { color: #cbd5e1; }
+
+  /* SCORE CIRCLE */
+  .score { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; font-weight: 700; font-size: .95rem; }
+  .score-5 { background: #dcfce7; color: #15803d; }
+  .score-4 { background: #d1fae5; color: #166534; }
+  .score-3 { background: #fef3c7; color: #92400e; }
+  .score-2 { background: #fed7aa; color: #9a3412; }
+  .score-1 { background: #fee2e2; color: #991b1b; }
+
+  /* PROSPECT CARDS */
+  .prospects { display: flex; flex-direction: column; gap: 28px; margin-bottom: 48px; }
+  .prospect-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .prospect-header { display: flex; align-items: center; gap: 16px; padding: 20px 24px; background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%); color: white; }
+  .prospect-rank { font-size: 2rem; font-weight: 800; opacity: .7; }
+  .prospect-title { flex: 1; }
+  .prospect-title h3 { font-size: 1.2rem; margin: 0; }
+  .prospect-title span { font-size: .88rem; opacity: .85; }
+  .prospect-score-big { background: rgba(255,255,255,.2); border-radius: 12px; padding: 8px 16px; text-align: center; }
+  .prospect-score-big .num { font-size: 1.8rem; font-weight: 800; }
+  .prospect-score-big .label { font-size: .72rem; opacity: .85; }
+
+  .prospect-body { padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 640px) { .prospect-body { grid-template-columns: 1fr; } }
+
+  .analysis-block h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gray); margin-bottom: 8px; }
+  .check-list { list-style: none; }
+  .check-list li { display: flex; gap: 8px; align-items: flex-start; font-size: .9rem; margin-bottom: 5px; }
+  .check-list li span:first-child { flex-shrink: 0; margin-top: 1px; }
+
+  /* MESSAGE BOX */
+  .message-box { grid-column: 1 / -1; }
+  .message-box h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gray); margin-bottom: 8px; }
+  .message-inner { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 16px; font-size: .88rem; line-height: 1.7; color: var(--text); }
+  .message-inner strong { color: var(--brand); }
+
+  /* CONTACT ROW */
+  .contact-row { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .contact-item { display: flex; align-items: center; gap: 6px; font-size: .85rem; color: var(--text-soft); }
+  .contact-item a { color: var(--brand); text-decoration: none; }
+  .contact-item a:hover { text-decoration: underline; }
+
+  /* JSON EXPORT */
+  .json-section { margin-bottom: 48px; }
+  .json-box { background: #1e293b; color: #a5f3fc; border-radius: 12px; padding: 24px; font-family: 'Courier New', monospace; font-size: .82rem; overflow-x: auto; line-height: 1.7; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 32px; font-size: .82rem; color: var(--gray); border-top: 1px solid var(--border); }
+
+  /* OPPORTUNITY LABEL */
+  .opp-label { font-weight: 700; }
+  .opp-alta { color: var(--green); }
+  .opp-media { color: var(--yellow); }
+  .opp-baja { color: var(--gray); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Informe de Prospección de Clientes</h1>
+  <p>Análisis de presencia digital y oportunidades de venta</p>
+  <div class="meta-pills">
+    <span class="pill">📍 Granada</span>
+    <span class="pill">🏥 Clínicas</span>
+    <span class="pill">🛠 Diseño web + IA</span>
+    <span class="pill">📅 Mayo 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Clínicas analizadas</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:#16a34a">3</div>
+      <div class="stat-label">Oportunidades altas</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:#d97706">2</div>
+      <div class="stat-label">Oportunidades medias</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:#dc2626">1</div>
+      <div class="stat-label">Oportunidades bajas</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5/5</div>
+      <div class="stat-label">Top oportunidad</div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <h2>Resumen de todas las clínicas</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Clínica</th>
+          <th>Web</th>
+          <th>HTTPS</th>
+          <th>Blog/SEO</th>
+          <th>Citas Online</th>
+          <th>Redes Sociales</th>
+          <th>Oportunidad</th>
+          <th>Puntuación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td><strong>Clínica Dental Márquez</strong></td>
+          <td><a href="https://clinicadentalmarquez.es" target="_blank">clinicadentalmarquez.es</a></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-red">✗ No</span></td>
+          <td><span class="badge badge-red">✗ No</span></td>
+          <td><span class="badge badge-red">✗ No</span></td>
+          <td><span class="opp-label opp-alta">⬆ ALTA</span></td>
+          <td><div class="score score-5">5</div></td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td><strong>Clínica Diéguez</strong></td>
+          <td><a href="https://clinicadieguez.com" target="_blank">clinicadieguez.com</a></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-red">✗ No</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="opp-label opp-alta">⬆ ALTA</span></td>
+          <td><div class="score score-4">4</div></td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td><strong>Clínica López-Gollonet</strong></td>
+          <td><a href="https://clinicalopezgollonet.es" target="_blank">clinicalopezgollonet.es</a></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-yellow">~ Parcial</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="opp-label opp-alta">⬆ ALTA</span></td>
+          <td><div class="score score-4">4</div></td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td><strong>De Vicente Dental</strong></td>
+          <td><a href="https://www.devicenteclinicadental.es" target="_blank">devicenteclinicadental.es</a></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-red">✗ No</span></td>
+          <td><span class="badge badge-green">✓ 7 redes</span></td>
+          <td><span class="opp-label opp-media">→ MEDIA</span></td>
+          <td><div class="score score-3">3</div></td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td><strong>AC Healthy & Co</strong></td>
+          <td><a href="https://achealthyandco.com" target="_blank">achealthyandco.com</a></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="opp-label opp-media">→ MEDIA</span></td>
+          <td><div class="score score-2">2</div></td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td><strong>Centro Diagnóstico Granada</strong></td>
+          <td><a href="https://centrodiagnostico.com" target="_blank">centrodiagnostico.com</a></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="badge badge-green">✓ Sí</span></td>
+          <td><span class="opp-label opp-baja">↓ BAJA</span></td>
+          <td><div class="score score-1">1</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TOP PROSPECTS -->
+  <h2>Análisis detallado — Top 3 oportunidades</h2>
+  <div class="prospects">
+
+    <!-- PROSPECT 1 -->
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-rank">#1</div>
+        <div class="prospect-title">
+          <h3>Clínica Dental Márquez</h3>
+          <span>Granada · Odontología integral desde 1994</span>
+        </div>
+        <div class="prospect-score-big">
+          <div class="num">5/5</div>
+          <div class="label">Oportunidad</div>
+        </div>
+      </div>
+      <div class="prospect-body">
+        <div class="analysis-block">
+          <h4>⚠️ Lo que le falta</h4>
+          <ul class="check-list">
+            <li><span>❌</span><span>Sin blog ni contenido SEO — no aparece en Google con búsquedas clave</span></li>
+            <li><span>❌</span><span>Sin redes sociales visibles — invisible para pacientes en Instagram/Facebook</span></li>
+            <li><span>❌</span><span>Sin citas online — los pacientes solo pueden llamar por teléfono</span></li>
+            <li><span>❌</span><span>Sin automatizaciones — recordatorios, seguimiento y captación son manuales</span></li>
+            <li><span>❌</span><span>Imágenes sin cargar (SVGs placeholder) — web incompleta visualmente</span></li>
+          </ul>
+        </div>
+        <div class="analysis-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="check-list">
+            <li><span>✅</span><span>HTTPS activo</span></li>
+            <li><span>✅</span><span>Teléfono visible: 958 520 281</span></li>
+            <li><span>✅</span><span>Chat integrado (Joinchat)</span></li>
+            <li><span>✅</span><span>Servicios bien descritos</span></li>
+            <li><span>✅</span><span>Testimonios de clientes</span></li>
+          </ul>
+        </div>
+        <div class="message-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="message-inner">
+            Buenos días, me llamo <strong>[Tu nombre]</strong> y trabajo con clínicas dentales en Granada ayudándoles a conseguir más pacientes con diseño web y automatizaciones con IA.<br><br>
+            He analizado vuestra web y veo que tenéis potencial para crecer bastante: no aparecéis en búsquedas locales clave como "dentista Granada centro" y no tenéis citas online, lo que hace que muchos posibles pacientes descarten llamar y acaban eligiendo a la competencia.<br><br>
+            Con un sistema de <strong>citas automáticas + recordatorios por WhatsApp + contenido SEO</strong>, clínicas similares en Andalucía han duplicado sus nuevas consultas en 3 meses.<br><br>
+            ¿Os vendría bien una llamada de 15 minutos esta semana para contaros cómo lo hacemos?
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-item">📞 <a href="tel:958520281">958 520 281</a></div>
+          <div class="contact-item">📞 <a href="tel:691408290">691 408 290</a></div>
+          <div class="contact-item">🌐 <a href="https://clinicadentalmarquez.es" target="_blank">clinicadentalmarquez.es</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROSPECT 2 -->
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-rank">#2</div>
+        <div class="prospect-title">
+          <h3>Clínica Diéguez</h3>
+          <span>Granada · Odontología multidisciplinar</span>
+        </div>
+        <div class="prospect-score-big">
+          <div class="num">4/5</div>
+          <div class="label">Oportunidad</div>
+        </div>
+      </div>
+      <div class="prospect-body">
+        <div class="analysis-block">
+          <h4>⚠️ Lo que le falta</h4>
+          <ul class="check-list">
+            <li><span>❌</span><span>Sin citas online — cada cita requiere llamada o email manual</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de recordatorio ni seguimiento post-visita</span></li>
+            <li><span>❌</span><span>Diseño web mejorable — aspecto estático y sin llamadas a la acción claras</span></li>
+            <li><span>❌</span><span>Sin chatbot ni asistente de IA para responder fuera de horario</span></li>
+            <li><span>❌</span><span>No captura leads — solo formulario básico</span></li>
+          </ul>
+        </div>
+        <div class="analysis-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="check-list">
+            <li><span>✅</span><span>Blog con contenido SEO por especialidad</span></li>
+            <li><span>✅</span><span>Redes sociales (Facebook, Twitter, Instagram)</span></li>
+            <li><span>✅</span><span>Teléfono visible: 958 251 170</span></li>
+            <li><span>✅</span><span>Email de contacto disponible</span></li>
+            <li><span>✅</span><span>Testimonios de pacientes</span></li>
+          </ul>
+        </div>
+        <div class="message-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="message-inner">
+            Hola, soy <strong>[Tu nombre]</strong>, trabajo con clínicas dentales ayudándoles a automatizar la gestión de pacientes con IA.<br><br>
+            He revisado vuestra web — tenéis buen contenido SEO y presencia en redes, lo que ya os diferencia de muchos competidores en Granada. Pero hay un punto de mejora importante: sin <strong>citas online y automatizaciones</strong>, estáis perdiendo pacientes que llegan fuera de horario o que abandonan si el teléfono comunica.<br><br>
+            Podemos integrar un sistema que capture citas 24/7, mande recordatorios automáticos y recupere pacientes inactivos con WhatsApp, sin que tengáis que hacer nada manualmente.<br><br>
+            ¿Hablamos 15 minutos esta semana?
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-item">📞 <a href="tel:958251170">958 251 170</a></div>
+          <div class="contact-item">📧 <a href="mailto:administracion@clinicadieguez.com">administracion@clinicadieguez.com</a></div>
+          <div class="contact-item">🌐 <a href="https://clinicadieguez.com" target="_blank">clinicadieguez.com</a></div>
+          <div class="contact-item">📍 Calle José Recuerda nº4, Local 2, Granada</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROSPECT 3 -->
+    <div class="prospect-card">
+      <div class="prospect-header">
+        <div class="prospect-rank">#3</div>
+        <div class="prospect-title">
+          <h3>Clínica Dental López-Gollonet</h3>
+          <span>Granada · C/ Sócrates nº12</span>
+        </div>
+        <div class="prospect-score-big">
+          <div class="num">4/5</div>
+          <div class="label">Oportunidad</div>
+        </div>
+      </div>
+      <div class="prospect-body">
+        <div class="analysis-block">
+          <h4>⚠️ Lo que le falta</h4>
+          <ul class="check-list">
+            <li><span>❌</span><span>Citas online no claras ni optimizadas — el proceso de reserva es confuso</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de seguimiento post-tratamiento</span></li>
+            <li><span>❌</span><span>Sin chatbot de IA para atender dudas fuera de horario</span></li>
+            <li><span>❌</span><span>Menú de navegación complejo — alta tasa de abandono probable</span></li>
+            <li><span>❌</span><span>Sin captación automática de reseñas (solo Facebook visible)</span></li>
+          </ul>
+        </div>
+        <div class="analysis-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="check-list">
+            <li><span>✅</span><span>Blog activo con +15 artículos SEO</span></li>
+            <li><span>✅</span><span>108 reseñas con puntuación excelente</span></li>
+            <li><span>✅</span><span>WhatsApp integrado en web</span></li>
+            <li><span>✅</span><span>Diseño responsive y profesional</span></li>
+            <li><span>✅</span><span>Teléfono visible: 958 805 412</span></li>
+          </ul>
+        </div>
+        <div class="message-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="message-inner">
+            Hola, mi nombre es <strong>[Tu nombre]</strong> y me dedico a ayudar a clínicas dentales a crecer con automatizaciones de IA.<br><br>
+            He visto que tenéis una web muy bien posicionada y excelentes valoraciones — eso es una base fantástica. Lo que veo que podría multiplicar vuestros resultados es un sistema de <strong>seguimiento automático post-visita</strong>: mensajes personalizados por WhatsApp para recordar revisiones, pedir reseñas en Google, y reactivar pacientes que llevan tiempo sin visitaros.<br><br>
+            Clínicas con perfil similar han conseguido un 30% más de pacientes recurrentes en 60 días con este sistema.<br><br>
+            ¿Tenéis 15 minutos esta semana para que os cuente cómo funciona?
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-item">📞 <a href="tel:958805412">958 805 412</a></div>
+          <div class="contact-item">🌐 <a href="https://clinicalopezgollonet.es" target="_blank">clinicalopezgollonet.es</a></div>
+          <div class="contact-item">📍 C/ Sócrates nº12, Granada</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JSON EXPORT -->
+  <div class="json-section">
+    <h2>Exportación JSON — para CRM o Google Sheets</h2>
+    <div class="json-box">
+<pre>{
+  "generado": "2026-05-06",
+  "sector": "clínicas",
+  "ciudad": "Granada",
+  "servicio": "Diseño web + automatizaciones con IA",
+  "prospectos": [
+    {
+      "rank": 1,
+      "nombre": "Clínica Dental Márquez",
+      "web": "https://clinicadentalmarquez.es",
+      "telefono": ["958 520 281", "691 408 290"],
+      "email": null,
+      "direccion": "Granada",
+      "oportunidad": "ALTA",
+      "puntuacion": 5,
+      "carencias": ["sin blog/SEO", "sin redes sociales", "sin citas online", "sin automatizaciones"],
+      "estado": "por contactar"
+    },
+    {
+      "rank": 2,
+      "nombre": "Clínica Diéguez",
+      "web": "https://clinicadieguez.com",
+      "telefono": ["958 251 170"],
+      "email": "administracion@clinicadieguez.com",
+      "direccion": "Calle José Recuerda nº4, Local 2, Granada",
+      "oportunidad": "ALTA",
+      "puntuacion": 4,
+      "carencias": ["sin citas online", "sin automatizaciones", "diseño mejorable"],
+      "estado": "por contactar"
+    },
+    {
+      "rank": 3,
+      "nombre": "Clínica Dental López-Gollonet",
+      "web": "https://clinicalopezgollonet.es",
+      "telefono": ["958 805 412"],
+      "email": null,
+      "direccion": "C/ Sócrates nº12, Granada",
+      "oportunidad": "ALTA",
+      "puntuacion": 4,
+      "carencias": ["citas online no optimizadas", "sin seguimiento automático", "sin chatbot IA"],
+      "estado": "por contactar"
+    },
+    {
+      "rank": 4,
+      "nombre": "De Vicente Dental",
+      "web": "https://www.devicenteclinicadental.es",
+      "telefono": ["958 522 333"],
+      "email": "clinica@devicenteclinicadental.es",
+      "direccion": "C/ Nueva de San Antón 15, Granada",
+      "oportunidad": "MEDIA",
+      "puntuacion": 3,
+      "carencias": ["sin citas online", "sin chatbot IA"],
+      "estado": "por contactar"
+    },
+    {
+      "rank": 5,
+      "nombre": "AC Healthy & Co",
+      "web": "https://achealthyandco.com",
+      "telefono": ["624 602 752"],
+      "email": "info@achealthyandco.com",
+      "direccion": "Calle Galileo 2, Granada",
+      "oportunidad": "MEDIA",
+      "puntuacion": 2,
+      "carencias": ["sin chat en vivo", "automatizaciones mejorables"],
+      "estado": "por contactar"
+    },
+    {
+      "rank": 6,
+      "nombre": "Centro Diagnóstico Granada",
+      "web": "https://centrodiagnostico.com",
+      "telefono": ["677 677 000"],
+      "email": "contabilidad@centrodiagnostico.com",
+      "direccion": "Granada",
+      "oportunidad": "BAJA",
+      "puntuacion": 1,
+      "carencias": ["sin chat en vivo"],
+      "estado": "baja prioridad"
+    }
+  ]
+}</pre>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Informe generado automáticamente · La Tribu · Mayo 2026<br>
+  Datos obtenidos mediante análisis de presencia digital pública
+</footer>
+
+</body>
+</html>

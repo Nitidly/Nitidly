@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta de Diagnóstico Estratégico — Nítidly</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #111110;
+    --verde: #1D9E75;
+    --verde-claro: #5DCAA5;
+    --blanco: #F7F6F2;
+    --gris: #888780;
+    --gris-oscuro: #1a1a18;
+    --borde: #2a2a28;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--negro);
+    border-bottom: 1px solid var(--verde);
+    padding: 3rem 4rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,158,117,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--verde);
+  }
+
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--blanco);
+  }
+
+  .brand-name span { color: var(--verde-claro); }
+
+  .doc-type {
+    text-align: right;
+  }
+
+  .doc-type-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gris);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .doc-type-value {
+    font-size: 12px;
+    color: var(--verde-claro);
+    letter-spacing: 0.05em;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--blanco);
+    margin-bottom: 0.5rem;
+  }
+
+  .header-title em {
+    font-style: italic;
+    color: var(--verde-claro);
+  }
+
+  .header-subtitle {
+    font-size: 13px;
+    color: var(--gris);
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+  }
+
+  .header-meta {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 2.5rem;
+    width: fit-content;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gris);
+  }
+
+  .meta-value {
+    font-size: 14px;
+    color: var(--blanco);
+    font-weight: 500;
+  }
+
+  /* BODY */
+  .body { padding: 0 4rem; }
+
+  /* SECTION */
+  .section {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--borde);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--verde);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--borde);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--blanco);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-desc {
+    font-size: 13px;
+    color: var(--gris);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: rgba(29,158,117,0.06);
+    border: 1px solid rgba(29,158,117,0.25);
+    border-left: 3px solid var(--verde);
+    border-radius: 8px;
+    padding: 1.5rem 1.75rem;
+    margin-top: 1.5rem;
+    font-size: 14px;
+    color: var(--blanco);
+    line-height: 1.7;
+  }
+
+  /* DETECCION (00 — punto de partida, personalizado) */
+  .deteccion {
+    background: rgba(29,158,117,0.06);
+    border: 1px solid rgba(29,158,117,0.25);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .deteccion-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .deteccion-list li {
+    font-size: 13px;
+    color: var(--blanco);
+    line-height: 1.7;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .deteccion-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--verde-claro);
+  }
+
+  .deteccion-list li strong { color: var(--verde-claro); }
+
+  /* PROBLEMA */
+  .problema-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 1.5rem;
+  }
+
+  .problema-item {
+    background: var(--gris-oscuro);
+    border: 1px solid var(--borde);
+    border-left: 3px solid var(--verde);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .problema-icon {
+    font-size: 22px;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .problema-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--blanco);
+    margin-bottom: 6px;
+  }
+
+  .problema-desc {
+    font-size: 12px;
+    color: var(--gris);
+    line-height: 1.6;
+  }
+
+  /* TIMELINE (cómo funciona) */
+  .timeline {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 1.25rem;
+    position: relative;
+    padding-bottom: 1.75rem;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 15px; top: 32px; bottom: 0;
+    width: 1px;
+    background: var(--borde);
+  }
+
+  .timeline-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--verde);
+    color: var(--negro);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+
+  .timeline-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--blanco);
+    margin-bottom: 4px;
+  }
+
+  .timeline-desc {
+    font-size: 12px;
+    color: var(--gris);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .timeline-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--verde-claro);
+    border: 1px solid rgba(29,158,117,0.3);
+    border-radius: 20px;
+    padding: 3px 10px;
+  }
+
+  /* QUE INCLUYE */
+  .check-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 1.5rem;
+  }
+
+  .check-item {
+    background: var(--gris-oscuro);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .check-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1px solid var(--verde);
+    color: var(--verde-claro);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .check-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--blanco);
+    margin-bottom: 4px;
+  }
+
+  .check-desc {
+    font-size: 12px;
+    color: var(--gris);
+    line-height: 1.6;
+  }
+
+  /* INVERSION */
+  .precio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 1.5rem;
+  }
+
+  .precio-box {
+    background: var(--gris-oscuro);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+
+  .precio-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gris);
+    margin-bottom: 0.75rem;
+  }
+
+  .precio-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--verde-claro);
+    margin-bottom: 0.5rem;
+  }
+
+  .precio-desc {
+    font-size: 12px;
+    color: var(--gris);
+    line-height: 1.6;
+  }
+
+  .precio-desc strong { color: var(--blanco); }
+
+  /* BONIFICACION */
+  .bonificacion {
+    background: rgba(29,158,117,0.08);
+    border: 1px solid rgba(29,158,117,0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bonificacion::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,158,117,0.12) 0%, transparent 70%);
+  }
+
+  .bonificacion-tag {
+    display: inline-block;
+    background: var(--verde);
+    color: var(--negro);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .bonificacion-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--blanco);
+    margin-bottom: 0.75rem;
+  }
+
+  .bonificacion-desc {
+    font-size: 13px;
+    color: var(--blanco);
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 1.25rem;
+  }
+
+  .bonificacion-valido {
+    font-size: 12px;
+    color: var(--gris);
+    padding-top: 1rem;
+    border-top: 1px solid rgba(29,158,117,0.2);
+  }
+
+  .bonificacion-valido strong { color: var(--verde-claro); }
+
+  /* FAQ */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 1.5rem;
+  }
+
+  .faq-item {
+    background: var(--gris-oscuro);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+  }
+
+  .faq-q {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--blanco);
+    margin-bottom: 6px;
+  }
+
+  .faq-a {
+    font-size: 12px;
+    color: var(--gris);
+    line-height: 1.6;
+  }
+
+  /* SIGUIENTE PASO */
+  .cta-box {
+    background: var(--gris-oscuro);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .cta-text {
+    font-size: 13px;
+    color: var(--gris);
+    line-height: 1.7;
+  }
+
+  .cta-text strong { color: var(--blanco); }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--verde);
+    color: var(--negro);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* FIRMA */
+  .firma {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--borde);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .firma-nombre {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--blanco);
+  }
+
+  .firma-rol {
+    font-size: 12px;
+    color: var(--verde-claro);
+  }
+
+  .firma-contacto {
+    font-size: 12px;
+    color: var(--gris);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #0d0d0c;
+    border-top: 1px solid var(--borde);
+    padding: 1.25rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .footer-brand {
+    font-size: 12px;
+    color: var(--gris);
+  }
+
+  .footer-brand strong { color: var(--verde-claro); }
+
+  .footer-note {
+    font-size: 11px;
+    color: #444;
+  }
+
+  @media print {
+    @page { size: A4; margin: 0; }
+    body { background: var(--negro); }
+    .footer { page-break-inside: avoid; }
+    .problema-item, .check-item, .timeline-item, .faq-item,
+    .precio-box, .deteccion, .bonificacion, .cta-box, .callout, .firma,
+    .faq-list {
+      break-inside: avoid;
+    }
+    .section-label, .section-title, .section-desc {
+      break-inside: avoid;
+      break-after: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <div class="brand-name">nítid<span>ly</span></div>
+    </div>
+    <div class="doc-type">
+      <span class="doc-type-label">Documento</span>
+      <span class="doc-type-value">Diagnóstico Estratégico IA &amp; Cyber</span>
+    </div>
+  </div>
+
+  <div class="header-title">Diagnóstico<br><em>Estratégico</em></div>
+  <div class="header-subtitle">Detectamos dónde se pierde tiempo, dinero y clientes · Elaborado por Nítidly</div>
+
+  <div class="header-meta">
+    <div class="meta-item">
+      <span class="meta-label">Cliente</span>
+      <span class="meta-value">[Nombre del cliente]</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Fecha</span>
+      <span class="meta-value">[Fecha]</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Inversión</span>
+      <span class="meta-value">497€</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- 00 — PUNTO DE PARTIDA (personalizado) -->
+  <div class="section">
+    <div class="section-label">00 — Punto de partida</div>
+    <div class="section-title">Esto es lo que hemos detectado en [Nombre del negocio]</div>
+    <div class="section-desc">A partir de la conversación que tuvimos, esto es lo primero que hemos identificado. El diagnóstico confirma, mide y prioriza cada uno de estos puntos.</div>
+    <div class="deteccion">
+      <ul class="deteccion-list">
+        <li><strong>[Punto 1]</strong> — [ej. la agenda y el seguimiento de citas se gestionan a mano por WhatsApp, sin sistema]</li>
+        <li><strong>[Punto 2]</strong> — [ej. los presupuestos se envían uno a uno y no hay seguimiento de los que no responden]</li>
+        <li><strong>[Punto 3]</strong> — [ej. los datos de clientes/pacientes se guardan en herramientas sin revisión de seguridad]</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 01 — EL PROBLEMA -->
+  <div class="section">
+    <div class="section-label">01 — El problema</div>
+    <div class="section-title">Tu negocio funciona, pero podría funcionar mejor</div>
+    <div class="section-desc">La mayoría de negocios locales de servicios tienen los mismos problemas. No por falta de esfuerzo, sino porque nadie les ha dicho exactamente dónde están las fugas.</div>
+
+    <div class="problema-grid">
+      <div class="problema-item">
+        <span class="problema-icon">⏱️</span>
+        <div class="problema-title">Tiempo perdido en tareas repetitivas</div>
+        <div class="problema-desc">Recordatorios manuales, respuestas a las mismas preguntas de siempre, seguimiento de leads que no llega a ningún lado.</div>
+      </div>
+      <div class="problema-item">
+        <span class="problema-icon">📉</span>
+        <div class="problema-title">Leads que entran y no se convierten</div>
+        <div class="problema-desc">Alguien pregunta por WhatsApp, no recibes respuesta rápida, y se va a la competencia. Sin sistema, sin seguimiento, sin venta.</div>
+      </div>
+      <div class="problema-item">
+        <span class="problema-icon">🔁</span>
+        <div class="problema-title">Procesos que dependen de una sola persona</div>
+        <div class="problema-desc">Si esa persona no está, el negocio se para. No hay documentación, no hay delegación, no hay escala posible.</div>
+      </div>
+      <div class="problema-item">
+        <span class="problema-icon">📊</span>
+        <div class="problema-title">Sin visibilidad sobre qué funciona</div>
+        <div class="problema-desc">No sabes cuántos leads conviertes, cuánto cuesta captarlos ni qué canal rinde más. Tomas decisiones a ciegas.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 — LA SOLUCION -->
+  <div class="section">
+    <div class="section-label">02 — La solución</div>
+    <div class="section-title">Un diagnóstico que te dice exactamente qué arreglar</div>
+    <div class="section-desc">No vendemos tecnología. No vendemos IA. Vendemos claridad. En 7 días sabemos exactamente dónde se pierden tu tiempo, tus clientes y tu dinero, y te entregamos un plan concreto para recuperarlos.</div>
+    <div class="callout">
+      El diagnóstico no es una auditoría genérica. Es un análisis específico de tu negocio, tus procesos y tu stack tecnológico actual. El resultado es un roadmap priorizado por impacto, listo para ejecutarse.
+    </div>
+  </div>
+
+  <!-- 03 — COMO FUNCIONA -->
+  <div class="section">
+    <div class="section-label">03 — Cómo funciona</div>
+    <div class="section-title">7 días. Sin interrumpir tu operativa.</div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-num">1</div>
+        <div>
+          <div class="timeline-title">Cuestionarios de diagnóstico + llamada de onboarding</div>
+          <div class="timeline-desc">Recibes 4 formularios (ventas, marketing, delivery, operaciones) que rellenas cuando puedas, y hacemos una llamada de onboarding de 45-60 minutos para asegurarnos de que tenemos toda la información que necesitamos.</div>
+          <span class="timeline-tag">Día 1-2</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">2</div>
+        <div>
+          <div class="timeline-title">Análisis y mapeo de procesos</div>
+          <div class="timeline-desc">Analizamos tus respuestas, dibujamos tus procesos actuales y detectamos dónde está el problema real, no el síntoma.</div>
+          <span class="timeline-tag">Día 3-4</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">3</div>
+        <div>
+          <div class="timeline-title">Detección de oportunidades y revisión de seguridad</div>
+          <div class="timeline-desc">Identificamos qué se puede automatizar, qué necesita IA y qué tiene riesgos de seguridad en tu stack tecnológico actual.</div>
+          <span class="timeline-tag">Día 5</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">4</div>
+        <div>
+          <div class="timeline-title">Construcción del roadmap</div>
+          <div class="timeline-desc">Ordenamos las soluciones por impacto, dificultad y urgencia. Fase 0 quick wins, Fase 1 estructural, Fase 2 estratégico.</div>
+          <span class="timeline-tag">Día 6</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">5</div>
+        <div>
+          <div class="timeline-title">Llamada de entrega del informe</div>
+          <div class="timeline-desc">Revisamos juntos los hallazgos, el roadmap completo y las siguientes acciones concretas. Recibes el informe en Notion.</div>
+          <span class="timeline-tag">Día 7</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 — QUE INCLUYE -->
+  <div class="section">
+    <div class="section-label">04 — Qué incluye</div>
+    <div class="section-title">Todo lo que necesitas para tomar decisiones con criterio</div>
+
+    <div class="check-grid">
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Auditoría de las 4 áreas clave</div>
+          <div class="check-desc">Ventas, marketing, delivery y operaciones. Análisis completo de cómo funciona tu negocio hoy.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Mapa de procesos actual y optimizado</div>
+          <div class="check-desc">Diagrama visual de cómo fluyen tus procesos hoy y cómo deberían fluir tras la optimización.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Detección de oportunidades de IA</div>
+          <div class="check-desc">Lista priorizada de qué automatizar, qué necesita IA y qué no merece la pena tocar ahora.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Revisión de ciberseguridad</div>
+          <div class="check-desc">Análisis de riesgos sobre tu stack tecnológico actual: accesos, APIs, datos y buenas prácticas.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Roadmap de implementación por fases</div>
+          <div class="check-desc">Plan concreto ordenado por impacto y urgencia. Sabes qué hacer primero y por qué.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Informe en Notion + llamada de entrega</div>
+          <div class="check-desc">Documento profesional compartido contigo más una sesión de 60 minutos para revisarlo juntos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 — INVERSION -->
+  <div class="section">
+    <div class="section-label">05 — Inversión</div>
+    <div class="section-title">Una inversión que se paga sola</div>
+    <div class="section-desc">El diagnóstico no es un gasto. Es la única forma de saber exactamente dónde invertir para que cada euro rinda al máximo.</div>
+
+    <div class="precio-grid">
+      <div class="precio-box">
+        <div class="precio-label">Diagnóstico Estratégico — Precio único</div>
+        <div class="precio-value">497€</div>
+        <div class="precio-desc">Entrega en 7 días · IVA no incluido</div>
+      </div>
+      <div class="precio-box">
+        <div class="precio-label">Si contratas la implementación</div>
+        <div class="precio-value">0€</div>
+        <div class="precio-desc">Los <strong>497€ del diagnóstico se descuentan al 100%</strong> si contratas la implementación en los siguientes 30 días.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 — BONIFICACION -->
+  <div class="section">
+    <div class="section-label">06 — Bonificación</div>
+    <div class="bonificacion">
+      <span class="bonificacion-tag">El diagnóstico puede costarte 0€</span>
+      <div class="bonificacion-title">Si avanzamos juntos, el diagnóstico es gratis</div>
+      <div class="bonificacion-desc">Si tras la llamada de entrega decides contratar la implementación en los próximos 30 días, los 497€ del diagnóstico se descuentan íntegramente de la inversión total. El diagnóstico pasa a formar parte del proyecto sin coste adicional.</div>
+      <div class="bonificacion-valido">Esta bonificación es válida durante <strong>30 días desde la llamada de entrega</strong></div>
+    </div>
+  </div>
+
+  <!-- 07 — PRUEBA -->
+  <div class="section">
+    <div class="section-label">07 — Prueba</div>
+    <div class="section-title">Así es un agente que ya hemos construido</div>
+    <div class="section-desc">Para que veas que esto no se queda en diapositivas: este es un proyecto real, desarrollado para un centro de terapia capilar en Madrid con el mismo problema de fondo — agenda saturada, presupuestos a mano, seguimiento de clientas sin sistema.</div>
+
+    <div class="check-grid">
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Resuelve dudas sobre tratamientos y precios</div>
+          <div class="check-desc">Con una base de conocimiento entrenada con la información real del centro y su forma de hablar.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Gestiona citas de principio a fin</div>
+          <div class="check-desc">Consulta disponibilidad, reserva, modifica y cancela directamente en el calendario.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Envía presupuestos personalizados</div>
+          <div class="check-desc">Y hace seguimiento automático de las que quedan pendientes de respuesta.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✓</span>
+        <div>
+          <div class="check-title">Pide reseñas tras cada cita</div>
+          <div class="check-desc">Sin que nadie del equipo tenga que acordarse de hacerlo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 — PREGUNTAS FRECUENTES -->
+  <div class="section">
+    <div class="section-label">08 — Preguntas frecuentes</div>
+    <div class="section-title">Antes de que lo preguntes</div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">¿Tengo que dedicarle muchas horas?</div>
+        <div class="faq-a">No. El diagnóstico combina 4 cuestionarios que rellenas cuando puedas, una llamada de onboarding de 45-60 minutos al inicio (para asegurarnos de que tenemos toda la información que necesitamos) y una llamada de entrega de 60 minutos al final para revisar los resultados.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Qué pasa si después no quiero contratar la implementación?</div>
+        <div class="faq-a">Nada. Te quedas con el informe completo, el mapa de procesos y el roadmap, sin ningún compromiso de continuar. El diagnóstico tiene valor por sí mismo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Mi negocio no es muy "digital", ¿sirve igualmente?</div>
+        <div class="faq-a">Sí — de hecho cuanto menos automatizado esté hoy, más oportunidades de mejora suele haber. No hace falta tener nada implementado de antemano.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Es confidencial todo lo que compartimos?</div>
+        <div class="faq-a">Sí. Toda la información de tu negocio, tus procesos y los datos de tus clientes o pacientes se trata de forma confidencial y se usa únicamente para elaborar tu diagnóstico.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 — SIGUIENTE PASO -->
+  <div class="section">
+    <div class="section-label">09 — Siguiente paso</div>
+    <div class="section-title">Empezamos cuando quieras</div>
+    <div class="cta-box">
+      <div class="cta-text">
+        Reserva tu llamada de inicio. En 30 minutos confirmamos el alcance, te enviamos los cuestionarios y arrancamos el diagnóstico.<br><br>
+        <strong>En 7 días tienes claridad total sobre qué está fallando y cómo arreglarlo.</strong>
+      </div>
+      <a href="https://wa.me/34691195533?text=Hola%20Ana%2C%20quiero%20reservar%20la%20llamada%20de%20inicio%20del%20Diagn%C3%B3stico%20Estrat%C3%A9gico" class="cta-button" target="_blank" rel="noopener">Reservar llamada →</a>
+    </div>
+    <div class="firma">
+      <div class="firma-nombre">Ana Clemente</div>
+      <div class="firma-rol">Fundadora de Nítidly · Consultoría IA &amp; Cyber</div>
+      <div class="firma-contacto">📞 691 195 533 · 📧 ana@nitidly.com</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Elaborado por Ana Clemente · <strong>Nítidly</strong> · nitidly.com</div>
+  <div class="footer-note">Documento confidencial · Válido 30 días desde la fecha de emisión</div>
+</div>
+
+</body>
+</html>

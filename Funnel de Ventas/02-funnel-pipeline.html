@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2. Funnel y Pipeline · nítidly</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>🔄 Funnel de ventas y pipeline</h1>
+  <p>Del prospecto al cliente: el camino completo, dibujado, con un estado del CRM para cada paso y una acción obligatoria en cada uno.</p>
+  <div class="meta-pills">
+    <span class="pill">De "Pendiente" a "Cliente Implementación"</span>
+    <span class="pill">Multicanal: llamada + email + (WhatsApp opcional)</span>
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="index.html">Inicio</a>
+  <a href="01-cliente-ideal.html">1. Cliente ideal</a>
+  <a href="02-funnel-pipeline.html" class="active">2. Funnel y pipeline</a>
+  <a href="03-plan-diario.html">3. Plan diario</a>
+  <a href="04-guion-llamadas.html">4. Guion de llamadas</a>
+  <a href="05-plantillas-email.html">5. Emails</a>
+</nav>
+
+<div class="container">
+
+  <section>
+    <h2><span class="num">1</span> Diagnóstico: qué funciona y qué no, hoy</h2>
+
+    <div class="card-grid">
+      <div class="callout green">
+        <strong>✅ Funciona</strong>
+        <p>La <strong>investigación previa</strong> (detectar "carencias" reales antes de contactar) está hecha y es buena — se nota en las notas del CRM. Y cuando hay <strong>llamada y se habla con el dueño/a</strong>, hay conversación real (5 "1ª Llamada", la única "Respondió", varios "me llama él/ella").</p>
+      </div>
+      <div class="callout red">
+        <strong>❌ No funciona</strong>
+        <p><strong>El email como primer contacto</strong>: 116 enviados, 0 reuniones agendadas. Y sobre todo: <strong>no existe seguimiento</strong>. El campo "Fecha de seguimiento" está vacío en los 161 leads — por eso 24 leads en "Follow-up 1" llevan 26 días parados, incluidos varios que pidieron explícitamente que se les volviera a llamar.</p>
+      </div>
+    </div>
+
+    <div class="callout brand">
+      <strong>La regla de oro de este documento</strong>
+      <p>A partir de ahora, <strong>ningún lead se queda sin una fecha de seguimiento concreta</strong>, salvo que esté en "Cliente" o "Perdido". Si después de una llamada o email no sabes qué fecha poner, pon "+3 días laborables" por defecto. Esta única regla es la que más leads va a rescatar de los que ya tienes.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span> El funnel completo, paso a paso</h2>
+    <p class="small">Cada caja es un punto donde el lead tiene un <strong>estado</strong> en el CRM. Las flechas son las transiciones; las cajas en fila son las posibles bifurcaciones desde ese punto.</p>
+
+    <div class="funnel">
+
+      <div class="funnel-step brand">
+        <div class="step-title">📋 Prospección</div>
+        <div class="step-desc">Kit de prospección encuentra el negocio → entra al CRM como <strong>"Pendiente"</strong>, con la "carencia" detectada anotada y, si es posible, el nombre del dueño/a.</div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-step">
+        <div class="step-title">📞 1er contacto: llamada en frío</div>
+        <div class="step-desc">Canal de apertura por defecto. <strong>Objetivo único: agendar la Llamada Inicial gratuita (20-30 min)</strong>. No se vende el diagnóstico de 497€ en frío (ver doc. 4).</div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-branch">
+        <div class="funnel-step" style="border-color:var(--gray)">
+          <div class="step-title">📵 No contesta</div>
+          <div class="step-desc">Estado: <strong>"Sin contacto (intento X)"</strong>. Reintentar en franja horaria distinta. Máx. 3 intentos en 10 días → si nada, email + "Follow-up programado" o "Perdido (sin contacto)".</div>
+        </div>
+        <div class="funnel-step" style="border-color:var(--yellow)">
+          <div class="step-title">🚪 Gatekeeper / recepción</div>
+          <div class="step-desc">Conseguir el <strong>nombre del dueño/a</strong> + dejar mensaje breve. Estado: <strong>"Contactado"</strong>, seguimiento en 2-3 días.</div>
+        </div>
+        <div class="funnel-step green">
+          <div class="step-title">🗣️ Habla con el/la dueño/a</div>
+          <div class="step-desc">Conversación real. Continúa al siguiente paso.</div>
+        </div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-branch">
+        <div class="funnel-step green">
+          <div class="step-title">✅ Interesado, quiere agendar</div>
+          <div class="step-desc">→ Pasa directamente al siguiente paso del funnel</div>
+        </div>
+        <div class="funnel-step" style="border-color:var(--brand)">
+          <div class="step-title">📧 "Mándame info por email"</div>
+          <div class="step-desc">→ Email personalizado <strong>el mismo día</strong> + llamada de seguimiento programada. Estado: <strong>"Follow-up programado"</strong></div>
+        </div>
+        <div class="funnel-step" style="border-color:var(--yellow)">
+          <div class="step-title">🕐 No interesa ahora</div>
+          <div class="step-desc">→ Estado: <strong>"No interesado ahora (reactivar)"</strong>, fecha de seguimiento a 2-3 meses</div>
+        </div>
+        <div class="funnel-step" style="border-color:var(--red); background:var(--red-bg)">
+          <div class="step-title">❌ No, gracias</div>
+          <div class="step-desc">→ Estado: <strong>"Perdido"</strong> + motivo anotado en Notas</div>
+        </div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-step brand">
+        <div class="step-title">📅 Llamada Inicial agendada</div>
+        <div class="step-desc">20-30 min, gratuita y sin compromiso. Se manda email de confirmación + recordatorio 24h antes (doc. 5, plantillas E5/E6).</div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-step brand">
+        <div class="step-title">🔍 Llamada Inicial realizada</div>
+        <div class="step-desc">Descubrimiento: cómo funciona la empresa, qué duele hoy, dónde quiere llegar. Sin formularios largos — 30 minutos de contexto.</div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-step brand">
+        <div class="step-title">📄 Propuesta enviada — Diagnóstico Estratégico IA &amp; Cyber, 497 €</div>
+        <div class="step-desc">Por email, en menos de 24-48h tras la llamada inicial, mientras la conversación está fresca. Llamada de cierre a los 3-4 días si no hay respuesta.</div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-branch">
+        <div class="funnel-step green">
+          <div class="step-title">💰 Acepta</div>
+          <div class="step-desc">→ Estado: <strong>"Diagnóstico vendido"</strong></div>
+        </div>
+        <div class="funnel-step" style="border-color:var(--yellow)">
+          <div class="step-title">⏳ Ahora no, más adelante</div>
+          <div class="step-desc">→ <strong>"Follow-up programado"</strong> — se nutre y se reintenta</div>
+        </div>
+        <div class="funnel-step" style="border-color:var(--red); background:var(--red-bg)">
+          <div class="step-title">❌ No</div>
+          <div class="step-desc">→ <strong>"Perdido"</strong> + motivo (precio, momento, etc.)</div>
+        </div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-step green">
+        <div class="step-title">🛠️ Diagnóstico realizado (5-7 días hábiles)</div>
+        <div class="step-desc">Auditoría de las 4 áreas + BPMN + oportunidades de IA/automatización + revisión de ciberseguridad + roadmap priorizado.</div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-step green">
+        <div class="step-title">🤝 Llamada de entrega + Upsell Implementación</div>
+        <div class="step-desc">Se presenta el roadmap y la propuesta de implementación. Bonificación 100% del diagnóstico si se contrata en los siguientes 30 días.</div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+
+      <div class="funnel-step" style="border-color:var(--green); background:var(--green-bg); border-width:3px">
+        <div class="step-title">🏆 Cliente Implementación</div>
+        <div class="step-desc">Ejecución del roadmap. Si por ahora solo contrata el diagnóstico, queda como <strong>"Cliente Diagnóstico"</strong> + "Follow-up programado" para retomar la implementación más adelante.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span> Estados del CRM (Airtable) — definición y acción obligatoria</h2>
+    <p>Esta es la lista de valores que debería tener el campo <strong>"Estado"</strong> en la tabla Leads. Reutiliza los que ya existen y añade los que faltan para cubrir todo el funnel de arriba.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Estado</th><th>Significado</th><th>Acción obligatoria al ponerlo</th><th>Fecha de seguimiento</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="badge badge-gray">Pendiente</span></td><td>Lead nuevo, 0 contactos.</td><td>Programar 1ª llamada.</td><td>Hoy / mañana</td></tr>
+          <tr><td><span class="badge badge-gray">Sin contacto (intento 1/2/3)</span></td><td>Se ha llamado, no contesta o buzón de voz. <em>(sustituye a "No lo coge", añadiendo el contador)</em></td><td>Reintentar en franja horaria distinta. Si llega a intento 3 → email + "Follow-up programado" o "Perdido (sin contacto)".</td><td>+1-2 días laborables</td></tr>
+          <tr><td><span class="badge badge-brand">Contactado</span></td><td>Has hablado con una persona del negocio (dueño/a o no). <strong>Ya no significa "envié un email"</strong>.</td><td>Anotar en Notas qué se acordó. Si no se acordó nada concreto, fijar seguimiento a 3 días.</td><td>Según lo acordado (máx. 3 días)</td></tr>
+          <tr><td><span class="badge badge-brand">Llamada Inicial agendada</span></td><td>Hay fecha y hora concreta para la llamada de descubrimiento (20-30 min).</td><td>Enviar email de confirmación (E5) y programar recordatorio 24h antes (E6).</td><td>Fecha de la llamada</td></tr>
+          <tr><td><span class="badge badge-brand">Llamada Inicial realizada</span></td><td>La reunión de descubrimiento ha tenido lugar.</td><td>Enviar propuesta de Diagnóstico (497€) en 24-48h (E7).</td><td>+2-3 días</td></tr>
+          <tr><td><span class="badge badge-brand">Propuesta enviada</span></td><td>Propuesta del Diagnóstico Estratégico mandada por email.</td><td>Llamar para resolver dudas y cerrar si no hay respuesta.</td><td>+3-4 días</td></tr>
+          <tr><td><span class="badge badge-green">Diagnóstico vendido</span></td><td>Ha pagado, diagnóstico en marcha.</td><td>Ejecutar (5-7 días) + agendar Llamada de Entrega.</td><td>Fecha de entrega</td></tr>
+          <tr><td><span class="badge badge-green">Cliente Diagnóstico</span></td><td>Diagnóstico entregado, implementación no contratada (todavía).</td><td>Mantener relación — recordatorio de la bonificación 100% antes de que caduquen los 30 días.</td><td>+15-20 días (antes de que caduque la bonificación)</td></tr>
+          <tr><td><span class="badge badge-green" style="background:#16a34a;color:#fff">Cliente Implementación</span></td><td>Ha contratado la implementación. 🏆</td><td>Kickoff del proyecto.</td><td>—</td></tr>
+          <tr><td><span class="badge badge-purple">Follow-up programado</span></td><td>Cualquier lead "vivo" con un compromiso futuro concreto (ej. "le mando email y le llamo el jueves"). <em>Sustituye a "Follow-up 1/2/3..." — el número de seguimientos se anota en Notas, no en el estado.</em></td><td>El campo "Fecha de seguimiento" <strong>siempre relleno</strong>. Al llegar la fecha, vuelve a la lista de llamadas del día.</td><td>Obligatoria, según lo acordado</td></tr>
+          <tr><td><span class="badge badge-yellow">No interesado ahora (reactivar)</span></td><td>Dijo que no por ahora, sin cerrar la puerta del todo.</td><td>Anotar motivo/momento en Notas.</td><td>+2-3 meses</td></tr>
+          <tr><td><span class="badge badge-red">Perdido</span></td><td>No, definitivamente. (precio, ya tiene proveedor, no le interesa la IA, etc.)</td><td>Anotar el motivo exacto en Notas — sirve para afinar el ICP (doc. 1).</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout yellow">
+      <strong>Sobre los 161 leads que ya tienes</strong>
+      <p>No hace falta migrar todo el histórico de golpe. La próxima vez que toques un lead (lo llames o le escribas), actualízalo al nuevo estado correspondiente. Los 24 "Follow-up 1" parados desde el 9 de mayo son justo el primer bloque de llamadas del plan diario (doc. 3) — al tocarlos, ya quedan migrados.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">4</span> Reglas multicanal: cuándo llamada, cuándo email, cuándo otra cosa</h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <h4 class="mt-0">📞 Llamada — canal de apertura</h4>
+        <p>Es el canal por defecto para el primer contacto y para cualquier seguimiento donde haya que tomar una decisión (agendar, resolver dudas, cerrar). Genera conversación real; el email en frío no.</p>
+      </div>
+      <div class="card">
+        <h4 class="mt-0">📧 Email — canal de apoyo</h4>
+        <p>Se usa para: (1) cuando piden "mándame información" tras una llamada — siempre el mismo día; (2) confirmaciones y recordatorios de citas; (3) la propuesta formal del diagnóstico (algo que se manda por escrito, no se "vende" de palabra); (4) leads sin teléfono visible, como último recurso.</p>
+      </div>
+      <div class="card">
+        <h4 class="mt-0">💬 WhatsApp Business — opción a explorar</h4>
+        <p>Muchos de estos negocios (peluquerías, clínicas, gimnasios) atienden y reservan por WhatsApp a diario — probablemente tenga mejor tasa de apertura que el email para recordatorios y confirmaciones de la Llamada Inicial. <strong>Propuesta:</strong> probarlo en un lote pequeño (10-15 leads) como canal de recordatorio/confirmación, no como canal de apertura en frío (puede percibirse invasivo).</p>
+      </div>
+      <div class="card">
+        <h4 class="mt-0">💼 LinkedIn — opción secundaria</h4>
+        <p>Para el segmento de abogados (prioridad 3 del ICP) puede tener sentido conectar en LinkedIn antes o después de la llamada — refuerza la credibilidad profesional. No sustituye a la llamada, la complementa.</p>
+      </div>
+    </div>
+
+    <div class="callout brand">
+      <strong>Resumen en una frase</strong>
+      <p>La llamada abre la puerta y agenda. El email confirma, recuerda y formaliza por escrito. WhatsApp, si se prueba, es para recordatorios. Ningún canal sustituye a la conversación de la llamada inicial.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">5</span> Reglas de seguimiento y "lead atrasado"</h2>
+    <ul>
+      <li><strong>Lead atrasado</strong> = cualquier lead cuya "Fecha de seguimiento" ya ha pasado y no se ha vuelto a tocar. Estos son <strong>siempre</strong> los primeros de la lista de llamadas del día (ver doc. 3).</li>
+      <li><strong>Reintentos de llamada sin respuesta:</strong> máximo 3 intentos en 10 días laborables, en franjas horarias distintas (mañana temprano / mediodía / última hora de la tarde). Si tras 3 intentos no hay contacto → email único de "última vez que intento por aquí" (doc. 5, plantilla E3) y se pasa a "Follow-up programado" a 3-4 semanas, o "Perdido (sin contacto)" si el lead es de baja prioridad según el ICP.</li>
+      <li><strong>"No interesado ahora":</strong> no es un "no" definitivo. Se reactiva en 2-3 meses con un mensaje distinto (no repetir el mismo guion/email).</li>
+      <li><strong>"Perdido" definitivo:</strong> no se vuelve a contactar de forma individual. Solo entra en una futura campaña general de reactivación (ej. nuevo servicio, cambio de oferta, 6+ meses después) si en algún momento se decide hacer una.</li>
+      <li><strong>Compromisos explícitos del lead</strong> ("te llamo yo", "lo hablo con mi socio y te digo") tienen <strong>prioridad máxima</strong> sobre cualquier otro lead cuando llega su fecha — son los más calientes de toda la cartera.</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>

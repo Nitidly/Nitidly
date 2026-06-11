@@ -145,7 +145,7 @@ if (contactForm && formSuccess) {
         btn.disabled = false;
         btn.textContent = originalText;
         btn.style.opacity = '';
-        alert('Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos a nitidly.ia@gmail.com');
+        alert('Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos a ana@nitidly.com');
       }
     } catch {
       btn.disabled = false;

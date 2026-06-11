@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>40 Prospectos Granada — Diseño Web + IA</title>
+<style>
+  :root {
+    --brand: #2563eb;
+    --brand-dark: #1e40af;
+    --brand-light: #eff6ff;
+    --green: #16a34a;
+    --green-bg: #dcfce7;
+    --red: #dc2626;
+    --red-bg: #fee2e2;
+    --yellow: #d97706;
+    --yellow-bg: #fef3c7;
+    --gray: #64748b;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-soft: #475569;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%); color: white; padding: 52px 32px 44px; text-align: center; }
+  .header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -.02em; }
+  .header p { opacity: .85; font-size: 1.05rem; }
+  .meta-pills { display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .pill { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 5px 16px; font-size: .83rem; }
+
+  /* CONTAINER */
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 44px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px 16px; text-align: center; }
+  .stat-num { font-size: 2.4rem; font-weight: 800; line-height: 1; }
+  .stat-label { font-size: .8rem; color: var(--gray); margin-top: 6px; }
+
+  /* SECTOR TAGS */
+  .sector-tag { display: inline-block; border-radius: 6px; padding: 2px 8px; font-size: .72rem; font-weight: 600; white-space: nowrap; }
+  .tag-fisio { background: #e0f2fe; color: #0369a1; }
+  .tag-gym { background: #fce7f3; color: #9d174d; }
+  .tag-abogado { background: #f3e8ff; color: #7e22ce; }
+  .tag-pelu { background: #fff7ed; color: #c2410c; }
+  .tag-estetica { background: #fdf4ff; color: #a21caf; }
+  .tag-clinica { background: #ecfdf5; color: #065f46; }
+
+  /* SECTION */
+  h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-bottom: 52px; border-radius: 14px; border: 1px solid var(--border); box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); font-size: .875rem; }
+  thead th { background: var(--brand-dark); color: white; padding: 11px 14px; text-align: left; font-weight: 600; white-space: nowrap; font-size: .82rem; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--brand-light); }
+
+  /* BADGES */
+  .badge { display: inline-block; border-radius: 999px; padding: 2px 10px; font-size: .75rem; font-weight: 700; }
+  .badge-si { background: var(--green-bg); color: var(--green); }
+  .badge-no { background: var(--red-bg); color: var(--red); }
+  .badge-parcial { background: var(--yellow-bg); color: var(--yellow); }
+
+  /* SCORE */
+  .score { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-weight: 800; font-size: .9rem; flex-shrink: 0; }
+  .s5 { background: #dcfce7; color: #14532d; }
+  .s4 { background: #d1fae5; color: #166534; }
+  .s3 { background: #fef3c7; color: #92400e; }
+  .s2 { background: #fed7aa; color: #9a3412; }
+  .s1 { background: #fee2e2; color: #991b1b; }
+
+  .opp-alta { color: var(--green); font-weight: 700; }
+  .opp-media { color: var(--yellow); font-weight: 700; }
+  .opp-baja { color: var(--gray); font-weight: 600; }
+
+  /* PROSPECT CARDS */
+  .section-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gray); margin-bottom: 12px; }
+  .prospects-grid { display: flex; flex-direction: column; gap: 24px; margin-bottom: 52px; }
+
+  .pcard { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+  .pcard-header { display: flex; align-items: center; gap: 16px; padding: 18px 24px; }
+  .pcard-header.alta { background: linear-gradient(90deg, #1e40af, #2563eb); color: white; }
+  .pcard-header.media { background: linear-gradient(90deg, #92400e, #d97706); color: white; }
+  .pcard-header.baja { background: linear-gradient(90deg, #374151, #6b7280); color: white; }
+
+  .pcard-rank { font-size: 1.8rem; font-weight: 800; opacity: .6; min-width: 44px; }
+  .pcard-info { flex: 1; }
+  .pcard-info h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 2px; }
+  .pcard-info span { font-size: .82rem; opacity: .85; }
+  .pcard-score { background: rgba(255,255,255,.2); border-radius: 10px; padding: 6px 14px; text-align: center; flex-shrink: 0; }
+  .pcard-score .snum { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+  .pcard-score .slabel { font-size: .68rem; opacity: .85; display: block; }
+
+  .pcard-body { padding: 20px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 600px) { .pcard-body { grid-template-columns: 1fr; } }
+
+  .pcard-block h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gray); margin-bottom: 8px; }
+  .checklist { list-style: none; }
+  .checklist li { display: flex; gap: 7px; font-size: .875rem; margin-bottom: 4px; align-items: flex-start; }
+  .checklist li span:first-child { flex-shrink: 0; margin-top: 1px; }
+
+  .msg-box { grid-column: 1 / -1; }
+  .msg-box h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gray); margin-bottom: 8px; }
+  .msg-inner { background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0ea5e9; border-radius: 8px; padding: 14px 16px; font-size: .875rem; line-height: 1.75; }
+
+  .contact-strip { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .contact-item { display: flex; align-items: center; gap: 6px; font-size: .83rem; color: var(--text-soft); }
+  .contact-item a { color: var(--brand); text-decoration: none; }
+  .contact-item a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 32px; font-size: .8rem; color: var(--gray); border-top: 1px solid var(--border); margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>40 Prospectos — Granada</h1>
+  <p>Análisis de presencia digital · Diseño web + Automatizaciones con IA</p>
+  <div class="meta-pills">
+    <span class="pill">📍 Granada</span>
+    <span class="pill">🏥 Clínicas estéticas</span>
+    <span class="pill">🦵 Fisioterapia</span>
+    <span class="pill">💪 Gimnasios</span>
+    <span class="pill">⚖️ Abogados</span>
+    <span class="pill">✂️ Peluquerías</span>
+    <span class="pill">💄 Estética</span>
+    <span class="pill">📅 Mayo 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-card"><div class="stat-num" style="color:var(--brand)">40</div><div class="stat-label">Negocios analizados</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--green)">19</div><div class="stat-label">Oportunidades altas</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--yellow)">9</div><div class="stat-label">Oportunidades medias</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--gray)">12</div><div class="stat-label">Oportunidades bajas</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--brand)">6</div><div class="stat-label">Sectores cubiertos</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--green)">40</div><div class="stat-label">Mensajes personalizados</div></div>
+  </div>
+
+  <!-- TABLA RESUMEN -->
+  <h2>Resumen completo — 40 prospectos</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Sector</th>
+          <th>Web</th>
+          <th>Teléfono</th>
+          <th>Email</th>
+          <th>Blog/SEO</th>
+          <th>Citas Online</th>
+          <th>Redes</th>
+          <th>Oportunidad</th>
+          <th>Puntos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><b>1</b></td><td><b>Evolution Boutique Fitness</b></td><td><span class="sector-tag tag-gym">Gimnasio</span></td><td><a href="https://evolutionboutiquefitness.com" target="_blank">evolutionboutiquefitness.com</a></td><td>—</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s5">5</div></td></tr>
+        <tr><td><b>2</b></td><td><b>Vitasthetic</b></td><td><span class="sector-tag tag-clinica">Clínica estét.</span></td><td><a href="https://vitasthetic.es" target="_blank">vitasthetic.es</a></td><td>635 60 82 59</td><td>—</td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>3</b></td><td><b>Fisioterapia Granada</b></td><td><span class="sector-tag tag-fisio">Fisioterapia</span></td><td><a href="https://fisioterapia-granada.es" target="_blank">fisioterapia-granada.es</a></td><td>858 984 060</td><td>info@fisioterapia-granada.es</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>4</b></td><td><b>Carmen Rojas Fisioterapia</b></td><td><span class="sector-tag tag-fisio">Fisioterapia</span></td><td><a href="https://carmenrojasfisioterapia.es" target="_blank">carmenrojasfisioterapia.es</a></td><td>640 267 020</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>5</b></td><td><b>Trauma Granada</b></td><td><span class="sector-tag tag-fisio">Fisioterapia</span></td><td><a href="https://traumagranada.com" target="_blank">traumagranada.com</a></td><td>958 080 985</td><td>info@traumagranada.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>6</b></td><td><b>Miguel Peña Osteopatía</b></td><td><span class="sector-tag tag-fisio">Fisioterapia</span></td><td><a href="https://www.miguelpenaosteopata.com" target="_blank">miguelpenaosteopata.com</a></td><td>606 61 05 16</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-parcial">~</span></td><td><span class="badge badge-no">✗</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>7</b></td><td><b>Gimnasio TNT</b></td><td><span class="sector-tag tag-gym">Gimnasio</span></td><td><a href="https://gimnasiotnt.com" target="_blank">gimnasiotnt.com</a></td><td>604 833 956</td><td>—</td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>8</b></td><td><b>Diéguez Abogados</b></td><td><span class="sector-tag tag-abogado">Abogados</span></td><td><a href="https://dieguezabogados.com" target="_blank">dieguezabogados.com</a></td><td>958 29 49 49</td><td>info@dieguezabogados.com</td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-parcial">~</span></td><td><span class="badge badge-no">✗</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>9</b></td><td><b>Insúa Peluquerías</b></td><td><span class="sector-tag tag-pelu">Peluquería</span></td><td><a href="https://insuapeluquerias.es" target="_blank">insuapeluquerias.es</a></td><td>958 25 45 95</td><td>info@insuapeluquerias.es</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>10</b></td><td><b>Duo Peluqueros</b></td><td><span class="sector-tag tag-pelu">Peluquería</span></td><td><a href="https://duopeluqueros.es" target="_blank">duopeluqueros.es</a></td><td>—</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>11</b></td><td><b>Peluquería Rodríguez</b></td><td><span class="sector-tag tag-pelu">Peluquería</span></td><td><a href="https://www.peluqueriarodriguez.es" target="_blank">peluqueriarodriguez.es</a></td><td>958 12 08 63</td><td>—</td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>12</b></td><td><b>Bavilon Hair Studio</b></td><td><span class="sector-tag tag-pelu">Peluquería</span></td><td><a href="https://www.bavilonhair.com" target="_blank">bavilonhair.com</a></td><td>—</td><td>—</td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>13</b></td><td><b>Nina Merli Estética</b></td><td><span class="sector-tag tag-estetica">Estética</span></td><td><a href="https://www.ninamerli.com" target="_blank">ninamerli.com</a></td><td>958 25 66 04</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>14</b></td><td><b>Alice Beauty Concept</b></td><td><span class="sector-tag tag-estetica">Estética</span></td><td><a href="https://alicebeautyconcept.es" target="_blank">alicebeautyconcept.es</a></td><td>858 959 653</td><td>info@alicebeautyconcept.es</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+        <tr><td><b>15</b></td><td><b>Salus Medical Clinic</b></td><td><span class="sector-tag tag-clinica">Clínica estét.</span></td><td><a href="https://salusmc.com" target="_blank">salusmc.com</a></td><td>958 223 310</td><td>medicos@salusmc.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s3">3</div></td></tr>
+        <tr><td><b>16</b></td><td><b>Rosa Pérez Fisioterapia</b></td><td><span class="sector-tag tag-fisio">Fisioterapia</span></td><td><a href="https://rosaperezfisioterapia.com" target="_blank">rosaperezfisioterapia.com</a></td><td>656 320 853</td><td>info@rosaperezfisioterapia.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s3">3</div></td></tr>
+        <tr><td><b>17</b></td><td><b>JW Entrenamiento Granada</b></td><td><span class="sector-tag tag-gym">Gimnasio</span></td><td><a href="https://jimenezwaddington.com" target="_blank">jimenezwaddington.com</a></td><td>613 894 102</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-parcial">~</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s3">3</div></td></tr>
+        <tr><td><b>18</b></td><td><b>Sigma Training Granada</b></td><td><span class="sector-tag tag-gym">Gimnasio</span></td><td><a href="https://stgranada.es" target="_blank">stgranada.es</a></td><td>630 58 91 78</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s3">3</div></td></tr>
+        <tr><td><b>19</b></td><td><b>JG Fitness Granada</b></td><td><span class="sector-tag tag-gym">Gimnasio</span></td><td><a href="https://jgfitness.es" target="_blank">jgfitness.es</a></td><td>682 022 895</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-parcial">~</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s3">3</div></td></tr>
+        <tr><td><b>20</b></td><td><b>Fit2Grow Granada</b></td><td><span class="sector-tag tag-gym">Gimnasio</span></td><td><a href="https://fit2grow.es" target="_blank">fit2grow.es</a></td><td>635 997 145</td><td>info@fit2grow.es</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s3">3</div></td></tr>
+        <tr><td><b>21</b></td><td><b>Recover Abogados</b></td><td><span class="sector-tag tag-abogado">Abogados</span></td><td><a href="https://recoverabogados.es" target="_blank">recoverabogados.es</a></td><td>958 28 38 19</td><td>info@recoverabogados.es</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-parcial">~</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s3">3</div></td></tr>
+        <tr><td><b>22</b></td><td><b>TorresCollados Abogados</b></td><td><span class="sector-tag tag-abogado">Abogados</span></td><td><a href="https://www.torrescolladosabogados.com" target="_blank">torrescolladosabogados.com</a></td><td>625 58 22 38</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-parcial">~</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s3">3</div></td></tr>
+        <tr><td><b>23</b></td><td><b>Agatha Beauty</b></td><td><span class="sector-tag tag-estetica">Estética</span></td><td><a href="https://agatha.beauty" target="_blank">agatha.beauty</a></td><td>958 20 06 01</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-no">✗</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s3">3</div></td></tr>
+        <tr><td><b>24</b></td><td><b>Centro Suelo Pélvico</b></td><td><span class="sector-tag tag-fisio">Fisioterapia</span></td><td><a href="https://suelopelvicogranada.es" target="_blank">suelopelvicogranada.es</a></td><td>663 395 214</td><td>suelopelvicogranada@gmail.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s2">2</div></td></tr>
+        <tr><td><b>25</b></td><td><b>Proactiva Fisioterapia</b></td><td><span class="sector-tag tag-fisio">Fisioterapia</span></td><td><a href="https://proactivafisioterapia.com" target="_blank">proactivafisioterapia.com</a></td><td>—</td><td>info@proactivafisioterapia.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s2">2</div></td></tr>
+        <tr><td><b>26</b></td><td><b>Muñoz Quesada Abogados</b></td><td><span class="sector-tag tag-abogado">Abogados</span></td><td><a href="https://abogadosgranadamq.com" target="_blank">abogadosgranadamq.com</a></td><td>858 900 754</td><td>info@abogadosgranadamq.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-parcial">~</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s2">2</div></td></tr>
+        <tr><td><b>27</b></td><td><b>Abadys Abogados</b></td><td><span class="sector-tag tag-abogado">Abogados</span></td><td><a href="https://abadys.es" target="_blank">abadys.es</a></td><td>958 41 24 41</td><td>david@abadys.es</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-parcial">~</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s2">2</div></td></tr>
+        <tr><td><b>28</b></td><td><b>FRB Abogados</b></td><td><span class="sector-tag tag-abogado">Abogados</span></td><td><a href="https://frbabogados.es" target="_blank">frbabogados.es</a></td><td>958 22 14 30</td><td>info@frbabogados.es</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s2">2</div></td></tr>
+        <tr><td><b>29</b></td><td><b>Galía Beauty</b></td><td><span class="sector-tag tag-estetica">Estética</span></td><td><a href="https://esteticagalia.es" target="_blank">esteticagalia.es</a></td><td>652 11 26 21</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s2">2</div></td></tr>
+        <tr><td><b>30</b></td><td><b>Clínica Centro Granada</b></td><td><span class="sector-tag tag-clinica">Clínica estét.</span></td><td><a href="https://clinicacentro.com" target="_blank">clinicacentro.com</a></td><td>628 360 559</td><td>info@clinicacentro.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-media">→ MEDIA</span></td><td><div class="score s2">2</div></td></tr>
+        <tr><td><b>31</b></td><td>Clínica Amédic</td><td><span class="sector-tag tag-clinica">Clínica estét.</span></td><td><a href="https://amedic.es" target="_blank">amedic.es</a></td><td>958 279 449</td><td>—</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-baja">↓ BAJA</span></td><td><div class="score s1">1</div></td></tr>
+        <tr><td><b>32</b></td><td>Dra. Ana Maldonado</td><td><span class="sector-tag tag-clinica">Clínica estét.</span></td><td><a href="https://draanamaldonado.com" target="_blank">draanamaldonado.com</a></td><td>699 89 05 64</td><td>info@draanamaldonado.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-baja">↓ BAJA</span></td><td><div class="score s1">1</div></td></tr>
+        <tr><td><b>33</b></td><td>Clínica Beiman Granada</td><td><span class="sector-tag tag-clinica">Clínica médica</span></td><td><a href="https://www.clinicabeiman.es/granada/" target="_blank">clinicabeiman.es</a></td><td>958 236 357</td><td>granada@clinicabeiman.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-baja">↓ BAJA</span></td><td><div class="score s1">1</div></td></tr>
+        <tr><td><b>34</b></td><td>Sano Center Granada</td><td><span class="sector-tag tag-gym">Gimnasio</span></td><td><a href="https://sanocenter.es" target="_blank">sanocenter.es</a></td><td>657 572 571</td><td>granada@sanocenter.es</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-baja">↓ BAJA</span></td><td><div class="score s1">1</div></td></tr>
+        <tr><td><b>35</b></td><td>Pozo Abogados & Asoc.</td><td><span class="sector-tag tag-abogado">Abogados</span></td><td><a href="https://pozoabogadosasociados.com" target="_blank">pozoabogadosasociados.com</a></td><td>618 619 922</td><td>consultas@pozoabogadosasociados.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-baja">↓ BAJA</span></td><td><div class="score s1">1</div></td></tr>
+        <tr><td><b>36</b></td><td>Ángel M. Peluquerías</td><td><span class="sector-tag tag-pelu">Peluquería</span></td><td><a href="https://peluqueriasengranada.com" target="_blank">peluqueriasengranada.com</a></td><td>958 202 032</td><td>info@angelmpeluquerias.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-baja">↓ BAJA</span></td><td><div class="score s1">1</div></td></tr>
+        <tr><td><b>37</b></td><td>Be/cool Granada</td><td><span class="sector-tag tag-pelu">Peluquería</span></td><td><a href="https://becoolgranada.com" target="_blank">becoolgranada.com</a></td><td>958 414 310</td><td>info@becoolgranada.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-baja">↓ BAJA</span></td><td><div class="score s1">1</div></td></tr>
+        <tr><td><b>38</b></td><td>BS Estilistas</td><td><span class="sector-tag tag-pelu">Peluquería</span></td><td><a href="https://bsestilistas.es" target="_blank">bsestilistas.es</a></td><td>958 25 18 48</td><td>hola@bsestilistas.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-baja">↓ BAJA</span></td><td><div class="score s1">1</div></td></tr>
+        <tr><td><b>39</b></td><td>Uve Gara Estética</td><td><span class="sector-tag tag-estetica">Estética</span></td><td><a href="https://www.uvegara.com" target="_blank">uvegara.com</a></td><td>858 813 809</td><td>info@uvegara.com</td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="badge badge-si">✓</span></td><td><span class="opp-baja">↓ BAJA</span></td><td><div class="score s1">1</div></td></tr>
+        <tr><td><b>40</b></td><td>Vital Centro Entrenamiento</td><td><span class="sector-tag tag-gym">Gimnasio</span></td><td><a href="https://www.vitalgranada.com" target="_blank">vitalgranada.com</a></td><td>—</td><td>—</td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-no">✗</span></td><td><span class="badge badge-no">✗</span></td><td><span class="opp-alta">⬆ ALTA</span></td><td><div class="score s4">4</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FICHAS DETALLADAS TOP 14 (score 4-5) -->
+  <h2>Fichas detalladas — Oportunidades más altas (puntuación 4-5)</h2>
+  <div class="prospects-grid">
+
+    <!-- 1 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#1</div>
+        <div class="pcard-info"><h3>Evolution Boutique Fitness</h3><span>Gimnasio / Entrenamiento personal · Calle San Vicente Ferrer 6, Granada</span></div>
+        <div class="pcard-score"><div class="snum">5/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin teléfono visible en la web</span></li>
+            <li><span>❌</span><span>Sin email público accesible</span></li>
+            <li><span>❌</span><span>Sin captación automática de leads</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de seguimiento IA</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Web moderna y responsive</span></li>
+            <li><span>✅</span><span>Blog y contenido SEO activo</span></li>
+            <li><span>✅</span><span>Instagram activo</span></li>
+            <li><span>✅</span><span>Sistema de reservas (app)</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, soy [Tu nombre] y trabajo con centros de entrenamiento personal en Granada. He visitado vuestra web y veo que tenéis una propuesta muy buena, pero me ha sido imposible encontrar vuestro teléfono o email — eso significa que muchos posibles clientes tampoco pueden contactaros. Con un sistema de captación automática de leads + seguimiento por WhatsApp, podríais llenar vuestra agenda sin depender de que os busquen en Instagram. ¿Hablamos 15 minutos esta semana?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">🌐 <a href="https://evolutionboutiquefitness.com" target="_blank">evolutionboutiquefitness.com</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#2</div>
+        <div class="pcard-info"><h3>Vitasthetic</h3><span>Clínica de medicina estética · P.º del Violón s/n, 18006 Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin blog ni estrategia de contenido SEO</span></li>
+            <li><span>❌</span><span>Sin citas online — solo teléfono/WhatsApp</span></li>
+            <li><span>❌</span><span>Sin email público visible</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de captación</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Web moderna y responsive</span></li>
+            <li><span>✅</span><span>WhatsApp integrado</span></li>
+            <li><span>✅</span><span>Redes sociales activas (IG, FB, YT)</span></li>
+            <li><span>✅</span><span>Horario ininterrumpido L-V</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Buenos días, me llamo [Tu nombre] y ayudo a clínicas de medicina estética en Granada a conseguir más pacientes. He visto vuestra web — tenéis potencial pero sin blog ni citas online sois casi invisibles en Google. Con contenido SEO + reservas automáticas, captaríais consultas sin estar al teléfono constantemente. ¿Os viene bien hablar esta semana?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:635608259">635 60 82 59</a></div>
+          <div class="contact-item">🌐 <a href="https://vitasthetic.es" target="_blank">vitasthetic.es</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#3</div>
+        <div class="pcard-info"><h3>Fisioterapia Granada</h3><span>Fisioterapia · Calle Nueva de San Antón 16, 1ºG, Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin citas online integradas</span></li>
+            <li><span>❌</span><span>Sin recordatorios automáticos de cita</span></li>
+            <li><span>❌</span><span>Sin chatbot de IA para atención fuera de horario</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Blog activo (14+ artículos SEO)</span></li>
+            <li><span>✅</span><span>Facebook y WhatsApp</span></li>
+            <li><span>✅</span><span>Web profesional y clara</span></li>
+            <li><span>✅</span><span>Teléfono y email visibles</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, soy [Tu nombre] y me dedico a ayudar a centros de fisioterapia a automatizar la gestión de pacientes. Tenéis buen blog y presencia en redes, pero sin citas online perdéis pacientes que llegan fuera de horario. Un sistema de reservas automáticas con recordatorios por WhatsApp os llenaría la agenda sin esfuerzo manual. ¿Hablamos?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:858984060">858 984 060</a></div>
+          <div class="contact-item">📞 <a href="tel:679081556">679 081 556</a></div>
+          <div class="contact-item">📧 <a href="mailto:info@fisioterapia-granada.es">info@fisioterapia-granada.es</a></div>
+          <div class="contact-item">🌐 <a href="https://fisioterapia-granada.es" target="_blank">fisioterapia-granada.es</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#4</div>
+        <div class="pcard-info"><h3>Carmen Rojas Fisioterapia y Pilates</h3><span>Fisioterapia · Granada Centro</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin citas online — todo por llamada/WhatsApp</span></li>
+            <li><span>❌</span><span>Sin email visible públicamente</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de seguimiento al paciente</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Web moderna y responsive</span></li>
+            <li><span>✅</span><span>Blog con contenido SEO local</span></li>
+            <li><span>✅</span><span>Facebook e Instagram activos</span></li>
+            <li><span>✅</span><span>WhatsApp integrado</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, me llamo [Tu nombre] y trabajo con centros de fisioterapia en Granada. Tenéis web cuidada y buen contenido, pero sin citas online los pacientes tienen que llamar para todo. Con un sistema automático de reservas y confirmaciones, recuperáis horas de gestión cada semana. ¿Hablamos esta semana?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:640267020">640 267 020</a></div>
+          <div class="contact-item">🌐 <a href="https://carmenrojasfisioterapia.es" target="_blank">carmenrojasfisioterapia.es</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#5</div>
+        <div class="pcard-info"><h3>Trauma Granada</h3><span>Fisioterapia / Rehabilitación · Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin citas online integradas</span></li>
+            <li><span>❌</span><span>Sin chatbot IA para atención fuera de horario</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de seguimiento post-visita</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Blog activo con contenido médico</span></li>
+            <li><span>✅</span><span>TikTok, LinkedIn, Instagram, YouTube</span></li>
+            <li><span>✅</span><span>Parking gratuito y metro cercano</span></li>
+            <li><span>✅</span><span>Convenio UNESPA (accidentes tráfico)</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, soy [Tu nombre] y ayudo a clínicas de rehabilitación en Granada. Tenéis muy buena presencia digital — blog activo, TikTok, LinkedIn — pero sin citas online perdéis pacientes que llegan de redes y no quieren llamar. Un chatbot de IA + reservas automáticas completaría el círculo y convertiría ese tráfico en citas reales. ¿Os interesa verlo?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:958080985">958 080 985</a></div>
+          <div class="contact-item">📞 <a href="tel:958078606">958 078 606</a></div>
+          <div class="contact-item">📧 <a href="mailto:info@traumagranada.com">info@traumagranada.com</a></div>
+          <div class="contact-item">🌐 <a href="https://traumagranada.com" target="_blank">traumagranada.com</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#6</div>
+        <div class="pcard-info"><h3>Miguel Peña Osteopatía</h3><span>Osteopatía / Fisioterapia · Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin redes sociales activas</span></li>
+            <li><span>❌</span><span>Sin citas online reales (solo redirección a contacto)</span></li>
+            <li><span>❌</span><span>Sin email público</span></li>
+            <li><span>❌</span><span>Sin seguimiento automático post-tratamiento</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Web moderna con HTTPS</span></li>
+            <li><span>✅</span><span>Blog de contenido SEO</span></li>
+            <li><span>✅</span><span>WhatsApp integrado</span></li>
+            <li><span>✅</span><span>Teléfono visible</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, me llamo [Tu nombre] y trabajo con osteopatas en Granada. Tenéis experiencia y buenas valoraciones, pero poca visibilidad online: sin redes activas ni citas online dependéis del boca a boca para crecer. Con redes + automatización de citas, podríais duplicar nuevos pacientes en 2-3 meses. ¿Hablamos?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:606610516">606 61 05 16</a></div>
+          <div class="contact-item">📱 <a href="https://wa.me/34608757168">WhatsApp 608 75 71 68</a></div>
+          <div class="contact-item">🌐 <a href="https://www.miguelpenaosteopata.com" target="_blank">miguelpenaosteopata.com</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#7</div>
+        <div class="pcard-info"><h3>Gimnasio TNT</h3><span>Gimnasio · C. Abderrahman, 2, Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin blog ni estrategia SEO</span></li>
+            <li><span>❌</span><span>Sin email visible</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de fidelización de socios</span></li>
+            <li><span>❌</span><span>Sin captación automática de leads</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Web moderna con Instagram feed</span></li>
+            <li><span>✅</span><span>WhatsApp integrado para contacto</span></li>
+            <li><span>✅</span><span>Tarifas transparentes sin permanencia</span></li>
+            <li><span>✅</span><span>CTAs claros en web</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, soy [Tu nombre] y ayudo a gimnasios en Granada a captar y fidelizar socios con IA. Tenéis buena presencia en Instagram y tarifas competitivas, pero sin blog ni captación automática perdéis a los que os buscan en Google. Con SEO + WhatsApp automatizado, reduciríais la rotación de socios y aumentaríais las altas sin publicidad de pago. ¿Os interesa conocerlo?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:604833956">604 833 956</a></div>
+          <div class="contact-item">📞 <a href="tel:958088872">958 08 88 72</a></div>
+          <div class="contact-item">🌐 <a href="https://gimnasiotnt.com" target="_blank">gimnasiotnt.com</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#8</div>
+        <div class="pcard-info"><h3>Diéguez Abogados</h3><span>Abogados · Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin blog ni contenido SEO</span></li>
+            <li><span>❌</span><span>Sin redes sociales</span></li>
+            <li><span>❌</span><span>Sin captación automática de consultas</span></li>
+            <li><span>❌</span><span>Sin seguimiento de leads</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Web moderna y profesional</span></li>
+            <li><span>✅</span><span>Formulario de contacto</span></li>
+            <li><span>✅</span><span>Teléfono y email visibles</span></li>
+            <li><span>✅</span><span>HTTPS y diseño responsive</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, me llamo [Tu nombre] y trabajo con despachos de abogados en Granada. He revisado vuestra web — bien estructurada y contacto claro, pero sin blog ni redes no aparecéis cuando alguien busca 'abogado laboral Granada' en Google. Con contenido jurídico SEO + automatización de consultas, vuestros clientes os encontrarían antes que a la competencia. ¿Hablamos?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:958294949">958 29 49 49</a></div>
+          <div class="contact-item">📧 <a href="mailto:info@dieguezabogados.com">info@dieguezabogados.com</a></div>
+          <div class="contact-item">🌐 <a href="https://dieguezabogados.com" target="_blank">dieguezabogados.com</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#9</div>
+        <div class="pcard-info"><h3>Insúa Peluquerías</h3><span>Peluquería · Granada (4 salones)</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin sistema de citas online</span></li>
+            <li><span>❌</span><span>Sin recordatorios automáticos</span></li>
+            <li><span>❌</span><span>Sin fidelización automatizada entre visitas</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Blog activo sobre tendencias capilares</span></li>
+            <li><span>✅</span><span>Facebook e Instagram</span></li>
+            <li><span>✅</span><span>Sección de promociones y eventos</span></li>
+            <li><span>✅</span><span>4 salones en Granada</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, soy [Tu nombre] y ayudo a peluquerías en Granada. Tenéis blog, redes y 4 salones — operación grande para gestionar todo manualmente. Sin citas online, vuestro equipo invierte horas en llamadas que podrían automatizarse. Con reservas automáticas + recordatorios + recuperación de clientes inactivos, llenaríais la agenda sola. ¿Os cuento cómo?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:958254595">958 25 45 95</a></div>
+          <div class="contact-item">📧 <a href="mailto:info@insuapeluquerias.es">info@insuapeluquerias.es</a></div>
+          <div class="contact-item">🌐 <a href="https://insuapeluquerias.es" target="_blank">insuapeluquerias.es</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#10</div>
+        <div class="pcard-info"><h3>Nina Merli Centro de Estética</h3><span>Estética / Belleza · Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin citas online</span></li>
+            <li><span>❌</span><span>Sin email visible</span></li>
+            <li><span>❌</span><span>Sin seguimiento automático post-visita</span></li>
+            <li><span>❌</span><span>Sin captación automática de reseñas</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Blog activo de belleza y campañas</span></li>
+            <li><span>✅</span><span>Instagram, Facebook y LinkedIn</span></li>
+            <li><span>✅</span><span>3 teléfonos de contacto visibles</span></li>
+            <li><span>✅</span><span>Web moderna y profesional</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, soy [Tu nombre] y ayudo a centros de estética en Granada. Tenéis blog activo y redes, pero sin citas online las clientas tienen que llamar — y muchas no lo hacen. Con reservas automáticas + recordatorios + solicitud de reseñas post-visita, convertís la satisfacción en nuevos clientes sin trabajo extra. ¿Os interesa verlo?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:958256604">958 25 66 04</a></div>
+          <div class="contact-item">📞 <a href="tel:958262425">958 26 24 25</a></div>
+          <div class="contact-item">📞 <a href="tel:958209908">958 20 99 08</a></div>
+          <div class="contact-item">🌐 <a href="https://www.ninamerli.com" target="_blank">ninamerli.com</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#11</div>
+        <div class="pcard-info"><h3>Alice Beauty Concept</h3><span>Estética / Belleza · Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin citas online automáticas</span></li>
+            <li><span>❌</span><span>Sin chatbot de atención al cliente</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de fidelización</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Más de 20 años de experiencia</span></li>
+            <li><span>✅</span><span>Blog activo con contenido estético</span></li>
+            <li><span>✅</span><span>Instagram, Facebook, LinkedIn</span></li>
+            <li><span>✅</span><span>Email corporativo y teléfono visibles</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, me llamo [Tu nombre] y trabajo con centros de estética en Granada. Tenéis más de 20 años de experiencia y web cuidada, pero sin citas online invertís tiempo en gestión manual que podría automatizarse. Un sistema de reservas + chatbot IA os liberaría horas cada semana y mejoraría la experiencia del cliente. ¿Hablamos?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:858959653">858 959 653</a></div>
+          <div class="contact-item">📞 <a href="tel:628613180">628 613 180</a></div>
+          <div class="contact-item">📧 <a href="mailto:info@alicebeautyconcept.es">info@alicebeautyconcept.es</a></div>
+          <div class="contact-item">🌐 <a href="https://alicebeautyconcept.es" target="_blank">alicebeautyconcept.es</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#12</div>
+        <div class="pcard-info"><h3>Peluquería Rodríguez</h3><span>Peluquería · Av. de América, 45, 18008 Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin blog ni contenido SEO</span></li>
+            <li><span>❌</span><span>Sin email visible</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de marketing</span></li>
+            <li><span>❌</span><span>Sin captación automática de reseñas</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>40+ años de trayectoria (desde 1972)</span></li>
+            <li><span>✅</span><span>Sistema de citas online presente</span></li>
+            <li><span>✅</span><span>Facebook e Instagram</span></li>
+            <li><span>✅</span><span>Herramientas de accesibilidad WCAG</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, soy [Tu nombre] y ayudo a peluquerías en Granada. Tenéis 40+ años de experiencia y una reputación enorme, pero sin blog ni email la web no os atrae tráfico nuevo. Con un sistema automático que pida reseñas después de cada visita, triplicaríais vuestra valoración en Google en pocas semanas. ¿Os cuento cómo?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">📞 <a href="tel:958120863">958 12 08 63</a></div>
+          <div class="contact-item">🌐 <a href="https://www.peluqueriarodriguez.es" target="_blank">peluqueriarodriguez.es</a></div>
+          <div class="contact-item">📍 Av. de América, 45, Granada</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#13</div>
+        <div class="pcard-info"><h3>Duo Peluqueros</h3><span>Peluquería · Granada Centro</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin teléfono visible en la web</span></li>
+            <li><span>❌</span><span>Sin email público</span></li>
+            <li><span>❌</span><span>Sin automatizaciones de marketing</span></li>
+            <li><span>❌</span><span>Sin seguimiento post-visita de clientes</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Sistema de citas online funcional</span></li>
+            <li><span>✅</span><span>Blog con sección de engagement</span></li>
+            <li><span>✅</span><span>Facebook, Twitter, Instagram</span></li>
+            <li><span>✅</span><span>Web moderna y limpia</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, me llamo [Tu nombre] y trabajo con peluquerías en Granada. Tenéis sistema de reservas online — un gran paso. Lo que falta es el lado de marketing: sin teléfono ni email visibles, perdéis clientes que buscan contactar directamente. Y sin seguimiento automático post-visita, cada cliente nuevo empieza de cero. Con fidelización por WhatsApp, los clientes vuelven solos. ¿Hablamos?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">🌐 <a href="https://duopeluqueros.es" target="_blank">duopeluqueros.es</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="pcard">
+      <div class="pcard-header alta">
+        <div class="pcard-rank">#14</div>
+        <div class="pcard-info"><h3>Bavilon Hair Studio</h3><span>Peluquería / Barbería · Granada</span></div>
+        <div class="pcard-score"><div class="snum">4/5</div><span class="slabel">Oportunidad</span></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-block">
+          <h4>❌ Lo que le falta</h4>
+          <ul class="checklist">
+            <li><span>❌</span><span>Sin teléfono ni email visible</span></li>
+            <li><span>❌</span><span>Sin redes sociales enlazadas</span></li>
+            <li><span>❌</span><span>Sin blog ni estrategia SEO</span></li>
+            <li><span>❌</span><span>Sin captación de reseñas en Google</span></li>
+          </ul>
+        </div>
+        <div class="pcard-block">
+          <h4>✅ Lo que tiene</h4>
+          <ul class="checklist">
+            <li><span>✅</span><span>Reserva online integrada</span></li>
+            <li><span>✅</span><span>Galería de servicios visualmente atractiva</span></li>
+            <li><span>✅</span><span>Productos premium (Kerastase)</span></li>
+            <li><span>✅</span><span>Diseño moderno y limpio</span></li>
+          </ul>
+        </div>
+        <div class="msg-box">
+          <h4>💬 Mensaje de contacto personalizado</h4>
+          <div class="msg-inner">Hola, me llamo [Tu nombre] y trabajo con peluquerías en Granada. He visitado vuestra web y, aunque tenéis reservas online, no encuentro teléfono, email ni redes — eso dificulta la confianza del cliente nuevo. Una web actualizada + Instagram activo + reseñas en Google automáticas marcaría una gran diferencia en vuestra captación. ¿Hablamos esta semana?</div>
+        </div>
+        <div class="contact-strip">
+          <div class="contact-item">🌐 <a href="https://www.bavilonhair.com" target="_blank">bavilonhair.com</a></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /prospects-grid -->
+
+</div><!-- /container -->
+
+<footer>
+  Informe generado automáticamente · La Tribu · Mayo 2026<br>
+  Datos obtenidos mediante análisis de presencia digital pública · 40 negocios analizados en Granada
+</footer>
+
+</body>
+</html>

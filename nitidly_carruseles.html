@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nítidly — Generador de carruseles</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: #0e0e0d; color: #F7F6F2; min-height: 100vh; padding: 40px 32px; }
+  header { margin-bottom: 40px; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: 28px; color: #F7F6F2; letter-spacing: -0.02em; }
+  header h1 em { color: #5DCAA5; font-style: italic; }
+  header p { font-size: 13px; color: #888780; margin-top: 4px; }
+  .layout { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: start; max-width: 960px; }
+  .controls { background: #1a1a18; border: 0.5px solid #2a2a28; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 32px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  label { font-size: 11px; color: #888780; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+  input[type="text"], textarea, select { width: 100%; background: #111110; border: 0.5px solid #2a2a28; border-radius: 8px; color: #F7F6F2; font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 10px 12px; outline: none; resize: none; transition: border-color 0.15s; appearance: none; }
+  input[type="text"]:focus, textarea:focus, select:focus { border-color: #1D9E75; }
+  textarea { min-height: 72px; line-height: 1.5; }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888780' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; cursor: pointer; }
+  .count-group { display: flex; gap: 8px; }
+  .count-btn { flex: 1; padding: 9px 0; background: #111110; border: 0.5px solid #2a2a28; border-radius: 8px; color: #888780; font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.15s; }
+  .count-btn:hover { border-color: #1D9E75; color: #F7F6F2; }
+  .count-btn.active { border-color: #1D9E75; color: #5DCAA5; background: #0d1f18; }
+  .gen-btn { width: 100%; padding: 13px; background: #1D9E75; border: none; border-radius: 10px; color: #111110; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+  .gen-btn:hover { background: #5DCAA5; }
+  .gen-btn:disabled { background: #2a2a28; color: #555; cursor: not-allowed; }
+  .preview-area { display: flex; flex-direction: column; gap: 16px; }
+  .slide-wrap { width: 100%; max-width: 460px; aspect-ratio: 1; position: relative; }
+  .slide { width: 100%; height: 100%; background: #111110; border-radius: 16px; border: 0.5px solid #1f1f1d; padding: 36px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+  .slide-dot { position: absolute; top: 22px; right: 22px; width: 7px; height: 7px; border-radius: 50%; background: #1D9E75; }
+  .slide-num { font-family: 'DM Serif Display', serif; font-size: 96px; color: #1a1a18; position: absolute; bottom: 20px; right: 28px; line-height: 1; user-select: none; }
+  .slide-tag { font-size: 11px; color: #1D9E75; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; font-weight: 500; }
+  .slide-headline { font-family: 'DM Serif Display', serif; font-size: 28px; color: #F7F6F2; line-height: 1.2; margin-bottom: 14px; }
+  .slide-headline em { color: #5DCAA5; font-style: italic; }
+  .slide-body { font-size: 13px; color: #888780; line-height: 1.65; max-width: 85%; }
+  .slide-cta { font-size: 12px; color: #5DCAA5; margin-top: 14px; font-weight: 500; }
+  .slide-brand { font-family: 'DM Sans', sans-serif; font-size: 10px; color: #333331; letter-spacing: 0.1em; text-transform: uppercase; }
+  .slide-brand em { color: #1D9E75; font-style: italic; }
+  .nav { display: none; align-items: center; gap: 14px; }
+  .nav button { background: #1a1a18; border: 0.5px solid #2a2a28; border-radius: 8px; color: #F7F6F2; font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 7px 16px; cursor: pointer; transition: border-color 0.15s; }
+  .nav button:hover { border-color: #1D9E75; }
+  .nav span { font-size: 13px; color: #888780; }
+  .export-section { display: none; background: #1a1a18; border: 0.5px solid #2a2a28; border-radius: 12px; padding: 16px 20px; }
+  .export-section p { font-size: 12px; color: #888780; line-height: 1.6; margin-bottom: 12px; }
+  .export-section strong { color: #F7F6F2; }
+  .copy-btn { background: #111110; border: 0.5px solid #2a2a28; border-radius: 8px; color: #5DCAA5; font-family: 'DM Sans', sans-serif; font-size: 12px; padding: 8px 14px; cursor: pointer; transition: border-color 0.15s; }
+  .copy-btn:hover { border-color: #1D9E75; }
+  .placeholder { display: flex; align-items: center; justify-content: center; height: 100%; color: #333331; font-size: 13px; text-align: center; padding: 24px; line-height: 1.6; }
+  .loading { display: flex; align-items: center; justify-content: center; height: 100%; color: #888780; font-size: 13px; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .blink { animation: blink 1.2s infinite; }
+  @media (max-width: 760px) { body { padding: 24px 16px; } .layout { grid-template-columns: 1fr; } .controls { position: static; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>nítid<em>ly</em></h1>
+  <p>Generador de carruseles · brand kit configurado</p>
+</header>
+<div class="layout">
+  <div class="controls">
+    <div class="field">
+      <label>Tema del carrusel</label>
+      <input type="text" id="topic" placeholder="Ej: Por qué tu clínica pierde pacientes sin darse cuenta" />
+    </div>
+    <div class="field">
+      <label>Sector objetivo</label>
+      <select id="sector">
+        <option value="dental">Clínica dental</option>
+        <option value="fisio">Fisioterapia / Salud</option>
+        <option value="gym">Gimnasio / Fitness</option>
+        <option value="estetica">Centro estético</option>
+        <option value="general">General (servicios con citas)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Tono</label>
+      <select id="tone">
+        <option value="directo">Directo y sin rodeos</option>
+        <option value="educativo">Educativo y cercano</option>
+        <option value="provocador">Provocador (pica la curiosidad)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Número de diapositivas</label>
+      <div class="count-group">
+        <button class="count-btn active" data-n="5">5</button>
+        <button class="count-btn" data-n="7">7</button>
+        <button class="count-btn" data-n="9">9</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Contexto adicional (opcional)</label>
+      <textarea id="context" placeholder="Ej: Quiero hablar de las no-shows, el cliente es dentista en Granada..."></textarea>
+    </div>
+    <button class="gen-btn" id="genBtn" onclick="generateCarousel()">Generar carrusel →</button>
+  </div>
+  <div class="preview-area">
+    <div class="slide-wrap">
+      <div class="slide" id="slideBox">
+        <div class="placeholder">Rellena el formulario y genera tu carrusel para verlo aquí</div>
+      </div>
+    </div>
+    <div class="nav" id="nav">
+      <button onclick="prev()">← Anterior</button>
+      <span id="counter"></span>
+      <button onclick="next()">Siguiente →</button>
+    </div>
+    <div class="export-section" id="exportSection">
+      <p><strong>Texto listo para Canva.</strong> Copia cada diapositiva y pégala en tu plantilla. Tamaño: 1080×1080px · Fondo: #111110 · Titular: DM Serif Display · Cuerpo: DM Sans.</p>
+      <button class="copy-btn" onclick="copyAll()">Copiar todo el texto del carrusel</button>
+    </div>
+  </div>
+</div>
+<script>
+let slides=[], current=0, n=5;
+document.querySelectorAll('.count-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.count-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); n=parseInt(btn.dataset.n);
+  });
+});
+async function generateCarousel(){
+  const topic=document.getElementById('topic').value.trim();
+  if(!topic){document.getElementById('topic').focus();return;}
+  const sector=document.getElementById('sector').value;
+  const tone=document.getElementById('tone').value;
+  const ctx=document.getElementById('context').value.trim();
+  const btn=document.getElementById('genBtn');
+  btn.disabled=true; btn.textContent='Generando...';
+  document.getElementById('slideBox').innerHTML='<div class="loading"><span class="blink">Creando tu carrusel...</span></div>';
+  document.getElementById('nav').style.display='none';
+  document.getElementById('exportSection').style.display='none';
+  const sectorMap={dental:'clínicas dentales',fisio:'centros de fisioterapia',gym:'gimnasios',estetica:'centros de estética',general:'negocios de servicios con citas'};
+  const toneMap={directo:'directo y sin rodeos',educativo:'educativo y cercano',provocador:'provocador, que pica la curiosidad'};
+  const prompt=`Eres el copywriter de Nítidly, agencia de automatización con IA. El copy SIEMPRE parte del dolor del cliente, nunca de la tecnología. Tono: elegante, directo, sin florituras.\n\nCrea carrusel LinkedIn ${n} diapositivas sobre: "${topic}"\nSector: ${sectorMap[sector]}\nTono: ${toneMap[tone]}\n${ctx?`Contexto: ${ctx}`:''}\n\nReglas:\n- Diapositiva 1: titular impactante máx 8 palabras, expresa el problema. Sin mencionar solución.\n- Intermedias: tag 2-3 palabras, titular máx 10 palabras, cuerpo máx 40 palabras.\n- Última: cierre con CTA hacia diagnóstico gratuito de Nítidly.\n\nResponde SOLO con JSON válido sin texto extra:\n[{"tag":"...","headline":"...","body":"...","cta":null}]`;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();
+    const raw=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+    slides=JSON.parse(raw); current=0; render();
+    document.getElementById('nav').style.display='flex';
+    document.getElementById('exportSection').style.display='block';
+  }catch(e){
+    document.getElementById('slideBox').innerHTML='<div class="placeholder">Error al generar. Comprueba tu conexión e inténtalo de nuevo.</div>';
+  }
+  btn.disabled=false; btn.textContent='Generar carrusel →';
+}
+function render(){
+  if(!slides.length)return;
+  const s=slides[current]; const num=String(current+1).padStart(2,'0');
+  const isFirst=current===0; const isLast=current===slides.length-1;
+  let top='', bottom='';
+  if(isFirst){
+    top=`<div><div class="slide-tag">nítid<em>ly</em></div><div class="slide-headline">${s.headline}</div>${s.body?`<div class="slide-body">${s.body}</div>`:''}</div>`;
+    bottom=`<div class="slide-brand">AI automation · nitidly.com</div>`;
+  } else {
+    top=`<div><div class="slide-tag">${s.tag||''}</div><div class="slide-headline">${s.headline}</div><div class="slide-body">${s.body||''}</div>${s.cta?`<div class="slide-cta">→ ${s.cta}</div>`:''}</div>`;
+    bottom=`<div class="slide-brand">nítid<em>ly</em> · nitidly.com</div>`;
+  }
+  document.getElementById('slideBox').innerHTML=`<div class="slide-dot"></div>${top}${bottom}<div class="slide-num">${num}</div>`;
+  document.getElementById('counter').textContent=`Diapositiva ${current+1} de ${slides.length}`;
+}
+function prev(){if(current>0){current--;render();}}
+function next(){if(current<slides.length-1){current++;render();}}
+function copyAll(){
+  if(!slides.length)return;
+  const text=slides.map((s,i)=>{
+    const lines=[`— DIAPOSITIVA ${i+1} —`];
+    if(s.tag)lines.push(`TAG: ${s.tag}`);
+    lines.push(`TITULAR: ${s.headline}`);
+    if(s.body)lines.push(`CUERPO: ${s.body}`);
+    if(s.cta)lines.push(`CTA: ${s.cta}`);
+    return lines.join('\n');
+  }).join('\n\n');
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.querySelector('.copy-btn');
+    btn.textContent='¡Copiado!';
+    setTimeout(()=>btn.textContent='Copiar todo el texto del carrusel',2000);
+  });
+}
+</script>
+</body>
+</html>

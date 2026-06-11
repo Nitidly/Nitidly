@@ -1,0 +1,86 @@
+{
+  "generado": "2026-05-06",
+  "sector": "clínicas",
+  "ciudad": "Granada",
+  "servicio": "Diseño web + automatizaciones con IA",
+  "prospectos": [
+    {
+      "rank": 1,
+      "nombre": "Clínica Dental Márquez",
+      "web": "https://clinicadentalmarquez.es",
+      "telefono": ["958 520 281", "691 408 290"],
+      "email": null,
+      "direccion": "Granada",
+      "oportunidad": "ALTA",
+      "puntuacion": 5,
+      "carencias": ["sin blog/SEO", "sin redes sociales", "sin citas online", "sin automatizaciones"],
+      "estado": "por contactar",
+      "mensaje_contacto": "Buenos días, me llamo [Tu nombre] y trabajo con clínicas dentales en Granada ayudándoles a conseguir más pacientes con diseño web y automatizaciones con IA. He analizado vuestra web y veo que tenéis potencial para crecer bastante: no aparecéis en búsquedas locales clave como 'dentista Granada centro' y no tenéis citas online, lo que hace que muchos posibles pacientes descarten llamar y acaban eligiendo a la competencia. Con un sistema de citas automáticas + recordatorios por WhatsApp + contenido SEO, clínicas similares en Andalucía han duplicado sus nuevas consultas en 3 meses. ¿Os vendría bien una llamada de 15 minutos esta semana para contaros cómo lo hacemos?"
+    },
+    {
+      "rank": 2,
+      "nombre": "Clínica Diéguez",
+      "web": "https://clinicadieguez.com",
+      "telefono": ["958 251 170"],
+      "email": "administracion@clinicadieguez.com",
+      "direccion": "Calle José Recuerda nº4, Local 2, Granada",
+      "oportunidad": "ALTA",
+      "puntuacion": 4,
+      "carencias": ["sin citas online", "sin automatizaciones", "diseño mejorable"],
+      "estado": "por contactar",
+      "mensaje_contacto": "Hola, soy [Tu nombre], trabajo con clínicas dentales ayudándoles a automatizar la gestión de pacientes con IA. He revisado vuestra web — tenéis buen contenido SEO y presencia en redes, lo que ya os diferencia de muchos competidores en Granada. Pero hay un punto de mejora importante: sin citas online y automatizaciones, estáis perdiendo pacientes que llegan fuera de horario o que abandonan si el teléfono comunica. Podemos integrar un sistema que capture citas 24/7, mande recordatorios automáticos y recupere pacientes inactivos con WhatsApp, sin que tengáis que hacer nada manualmente. ¿Hablamos 15 minutos esta semana?"
+    },
+    {
+      "rank": 3,
+      "nombre": "Clínica Dental López-Gollonet",
+      "web": "https://clinicalopezgollonet.es",
+      "telefono": ["958 805 412"],
+      "email": null,
+      "direccion": "C/ Sócrates nº12, Granada",
+      "oportunidad": "ALTA",
+      "puntuacion": 4,
+      "carencias": ["citas online no optimizadas", "sin seguimiento automático", "sin chatbot IA"],
+      "estado": "por contactar",
+      "mensaje_contacto": "Hola, mi nombre es [Tu nombre] y me dedico a ayudar a clínicas dentales a crecer con automatizaciones de IA. He visto que tenéis una web muy bien posicionada y excelentes valoraciones — eso es una base fantástica. Lo que veo que podría multiplicar vuestros resultados es un sistema de seguimiento automático post-visita: mensajes personalizados por WhatsApp para recordar revisiones, pedir reseñas en Google, y reactivar pacientes que llevan tiempo sin visitaros. Clínicas con perfil similar han conseguido un 30% más de pacientes recurrentes en 60 días con este sistema. ¿Tenéis 15 minutos esta semana para que os cuente cómo funciona?"
+    },
+    {
+      "rank": 4,
+      "nombre": "De Vicente Dental",
+      "web": "https://www.devicenteclinicadental.es",
+      "telefono": ["958 522 333"],
+      "email": "clinica@devicenteclinicadental.es",
+      "direccion": "C/ Nueva de San Antón 15, Granada",
+      "oportunidad": "MEDIA",
+      "puntuacion": 3,
+      "carencias": ["sin citas online", "sin chatbot IA"],
+      "estado": "por contactar",
+      "mensaje_contacto": "Hola, soy [Tu nombre] y ayudo a clínicas dentales a automatizar la captación de pacientes. Tenéis una presencia digital muy sólida — blog activo, 7 redes sociales, web profesional. Lo que os falta es cerrar el ciclo: un sistema de citas online integrado y un chatbot de IA que atienda consultas fuera de horario. Con vuestra base actual, ese salto sería muy rápido de implementar y os generaría resultados desde el primer mes. ¿Hablamos esta semana?"
+    },
+    {
+      "rank": 5,
+      "nombre": "AC Healthy & Co",
+      "web": "https://achealthyandco.com",
+      "telefono": ["624 602 752"],
+      "email": "info@achealthyandco.com",
+      "direccion": "Calle Galileo 2, Granada",
+      "oportunidad": "MEDIA",
+      "puntuacion": 2,
+      "carencias": ["sin chat en vivo", "automatizaciones mejorables"],
+      "estado": "por contactar",
+      "mensaje_contacto": "Hola, me llamo [Tu nombre] y trabajo con centros médicos en Granada. Tenéis una web muy completa y bien estructurada. Lo que veo que podría mejorar es la atención en tiempo real: un chat de IA que responda al instante y cualifique al paciente antes de que llegue a recepción. ¿Os interesa explorar esa posibilidad?"
+    },
+    {
+      "rank": 6,
+      "nombre": "Centro Diagnóstico Granada",
+      "web": "https://centrodiagnostico.com",
+      "telefono": ["677 677 000"],
+      "email": "contabilidad@centrodiagnostico.com",
+      "direccion": "Granada",
+      "oportunidad": "BAJA",
+      "puntuacion": 1,
+      "carencias": ["sin chat en vivo"],
+      "estado": "baja prioridad",
+      "mensaje_contacto": "Hola, soy [Tu nombre]. Tenéis una presencia digital muy avanzada. Si en algún momento queréis explorar un asistente de IA para atención al paciente en tiempo real, estaré encantado de contaros cómo lo hacemos."
+    }
+  ]
+}

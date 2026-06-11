@@ -1,0 +1,53 @@
+const fs = require('fs');
+
+const AIRTABLE_TOKEN = 'PON_AQUI_TU_TOKEN';
+const BASE_ID = 'appuhtI4ybSBeJRb4';
+const TABLE_NAME = 'Leads';
+
+const data = JSON.parse(fs.readFileSync('prospectos-clinicas-granada.json', 'utf8'));
+
+async function subirProspecto(prospecto) {
+  const body = {
+    fields: {
+      'Nombre': prospecto.nombre,
+      'Web': prospecto.web,
+      'Email': prospecto.email || '',
+      'Teléfono': Array.isArray(prospecto.telefono) ? prospecto.telefono[0] : prospecto.telefono || '',
+      'Oportunidad': prospecto.oportunidad,
+      'Carencias': prospecto.carencias.join(', '),
+      'Estado': 'Pendiente'
+    }
+  };
+
+  const response = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+
+  const result = await response.json();
+  if (result.id) {
+    console.log(`✓ ${prospecto.nombre}`);
+  } else {
+    console.log(`✗ Error en ${prospecto.nombre}:`, result);
+  }
+}
+
+async function main() {
+  for (const prospecto of data.prospectos) {
+    await subirProspecto(prospecto);
+    await new Promise(r => setTimeout(r, 300));
+  }
+  console.log('Listo.');
+}
+
+main();
+
+
+patc3NtEzqk8lloc3.39973c4ec42809602aa676048963d45b6f91d5e3564c7c40ac603a554a8e8d1exit
+rxit
+exit
+
