@@ -1,5 +1,5 @@
 const fs = require('fs');
-const AIRTABLE_TOKEN = 'patc3NtEzqk8lloc3.39973c4ec42809602aa676048963d45b6f91d5e3564c7c40ac603a554a8e8d1e';
+const token = process.env.AIRTABLE_TOKEN;
 const BASE_ID = 'appuhtI4ybSBeJRb4';
 const TABLE_NAME = 'Leads';
 const data = JSON.parse(fs.readFileSync('prospectos-clinicas-granada.json', 'utf8'));
